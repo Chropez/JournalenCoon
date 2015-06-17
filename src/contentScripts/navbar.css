@@ -1,0 +1,106 @@
+
+/* Navbar */
+
+#coon-navbar-toggler {
+  height: 45px;
+  width: 45px;
+  padding: 5px;
+  position: fixed;
+  z-index: 100;
+  opacity: 0.8;
+}
+
+#coon-navbar-toggler img{
+	width: 100%;
+}
+
+#coon-navbar-hoverarea {
+	position: fixed;
+	z-index: 100;
+	top: 0;
+	bottom: 0;
+	left:0;
+	width: 100px;	
+	overflow: auto;
+}
+#coon-navbar-hoverarea-trigger  {
+	position: fixed;
+	z-index: 100;
+	top: 0;
+	bottom: 0;
+	left:0;
+	width: 30px;	
+	overflow: auto;
+}
+
+#coon-navbar-hoverarea:hover #coon-navbar-hoverarea-trigger {
+	background-color: gray;
+	opacity: 0.2;
+} 
+
+
+#coon-navbar.active #coon-navbar-content{
+	left: 0;
+}
+
+#coon-navbar-content {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: -200%;
+	width: 220px;
+	z-index: 120;
+	background-color: white;
+	box-shadow: rgba(0, 0, 0, 0.2) 3px 0px 10px;
+
+	transition: all 0.2s;
+	transition-delay: 0.05s;
+}
+
+#coon-navbar-overlay {
+	background-color: gray;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left:0;
+	right:0;
+	z-index: 90;
+	opacity:0;
+	visibility: hidden;
+	transition: all 0.4s linear 0.2s;
+}
+
+#coon-navbar.active #coon-navbar-overlay {
+	opacity: 0.3;
+	visibility: visible;
+}
+
+#coon-navbar-patient-list {
+	list-style: none;
+	height: 100%;
+	overflow: auto;
+	padding-top: 10px;
+}
+
+#coon-navbar-patient-list li {
+	padding:5px;
+}
+
+#coon-navbar-patient-list li a {
+	color: #0174BA;
+	text-decoration: none;
+}
+#coon-navbar-content-header {
+	border-bottom: 1px solid #ABA8A8;
+	height: 160px;
+	width: 100%;
+	box-sizing: border-box;
+}
+#coon-navbar-content-header > div {
+	background: #fff url('chrome-extension://__MSG_@@extension_id__/src/img/coon_background.jpg');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	height: 100%;
+	width: 100%;
+}

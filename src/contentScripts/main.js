@@ -1,0 +1,3 @@
+(function() {
+	Coon.Navbar.Init();
+});

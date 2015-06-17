@@ -1,0 +1,62 @@
+{
+  "name": "Journalen Coon",
+  "version": "0.4.0",
+  "manifest_version": 2,
+  "description": "The Coon takes over Journalen!",
+  "homepage_url": "http://en.wikipedia.org/wiki/The_Coon",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": false
+  },
+  "options_page": "src/options_custom/index.html",
+  "page_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Journalen Coon!",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://local.jpn/*",
+        "http://local.admin.jpn/*",
+        "http://test.jpn.se/*",
+        "http://test.admin.jpn.se/*",
+        "https://demo.jpn.se/*",
+        "https://demo.admin.jpn.se/*",
+        "http://integration.jpn.se/*",
+        "http://integration.admin.jpn.se/*",
+        "http://82.136.180.244/JpnExternTest/WebClient/*",
+        "http://82.136.180.244/JpnExternTest/Admin/*",
+        "http://ejournalen.healthcare.evry.se/*",
+        "http://82.196.191.237:8080/*",
+        "http://172.17.254.12/*",
+        "http://172.17.254.12:8080/*",
+        "https://82.136.180.214/*",
+        "https://82.136.180.214:8080/*"
+      ],
+      
+      "css": [
+        "src/contentScripts/navbar.css"
+      ],
+
+      "js": [
+        "js/jquery/jquery.min.js",
+        "src/contentScripts/navbar.js"
+      ]
+    }
+  ],
+
+  "web_accessible_resources": [
+    "src/*"
+  ]
+
+}

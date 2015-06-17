@@ -1,0 +1,21 @@
+
+#mainPopup {
+	padding: 20px;
+	height: 200px;
+	width: 400px;
+}
+
+#mainPopup h3{
+	text-align: center;
+	margin-bottom: 30px;
+	margin-top: 0px;
+}
+
+.coon-img {
+	margin-top: 70px;
+	width: 100%;
+}
+
+#message {
+	display: none;
+}
