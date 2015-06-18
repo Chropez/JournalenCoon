@@ -6,17 +6,13 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
    	switch(action) {
 	    case 'navbar':
-	    	chrome.storage.sync.get('settings', function (settings) {
-    			sendResponse();
+	    	chrome.storage.sync.get({ settings: Coon.Settings }, function (res) {
+    			sendResponse( res.settings );
 	    	});
-
+	    	return true;
 	        break;
 	    default:
 	        return true;
-
-        sendResponse();
-
 	}
 
-    sendResponse({hi:'hello from topbar'});
 });

@@ -11,7 +11,7 @@
   },
   "default_locale": "en",
   "background": {
-    "page": "src/bg/background.html",
+    "page": "src/background/background.html",
     "persistent": false
   },
   "options_page": "src/options_custom/index.html",
@@ -50,7 +50,10 @@
 
       "js": [
         "js/jquery/jquery.min.js",
-        "src/contentScripts/navbar.js"
+        "src/contentScripts/utils.js",
+        "src/contentScripts/navbar2.js",
+        "src/contentScripts/skipRadroom.js",
+        "src/contentScripts/main.js"
       ]
     }
   ],

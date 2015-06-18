@@ -22,6 +22,7 @@ $(function(){
 
 	function onEnableNavbarChange(){
 		var isChecked = navbarCheckbox.is(':checked');
+		chrome.storage.sync.get({settings : })
 		chrome.storage.sync.set({navbarEnabled: isChecked}, function(){
 			showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
 		});
