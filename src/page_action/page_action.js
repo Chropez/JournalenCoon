@@ -1,38 +1,69 @@
-$(function(){
+var Coon = Coon || {};
+
+var getSettings = chrome.extension.getBackgroundPage().Coon.Background.getSettings;
+
+Coon.PageAction = (function(PageAction){
+	'use strict';
 	// Private settings
-	var navbarCheckbox = $('#enable-navbar');
-	var skipRadRoomCheckbox = $('#enable-skip-radroom');
+	var navbarCheckbox = $('#enable-navbar'),
+	skipRadRoomCheckbox = $('#enable-skip-radroom'),
+	rememberLastPage = $('#remember-last-page');
 
 	initSettings();
 
 	// Litseners
 	navbarCheckbox.on('change', onEnableNavbarChange);
 	skipRadRoomCheckbox.on('change', onEnableSkipRadRoomChange);
+	rememberLastPage.on('change', onEnableRememberLastPage);
 
 	//Functions
 	function initSettings() {
-		chrome.storage.sync.get({navbarEnabled: true}, function(storage){
-			navbarCheckbox.prop('checked', storage.navbarEnabled);
-		});
+		getSettings(function(settings) {
+			navbarCheckbox.prop('checked', settings.navbarEnabled);
+			skipRadRoomCheckbox.prop('checked', settings.skipRadRoomEnabled);
+			rememberLastPage.prop('checked', settings.rememberLastPage);
 
-		chrome.storage.sync.get({skipRadRoomEnabled: false}, function(storage){
-			skipRadRoomCheckbox.prop('checked', storage.skipRadRoomEnabled);
+			toggleDisabledSubMenus(!settings.navbarEnabled);
 		});
 	}
 
 	function onEnableNavbarChange(){
 		var isChecked = navbarCheckbox.is(':checked');
-		chrome.storage.sync.get({settings : })
-		chrome.storage.sync.set({navbarEnabled: isChecked}, function(){
-			showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
+
+		getSettings(function(settings){
+			settings.navbarEnabled = isChecked;
+			chrome.storage.sync.set({settings : settings}, function(a){
+				showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
+			});
 		});
+
+		toggleDisabledSubMenus(!isChecked);
 	}
 
 	function onEnableSkipRadRoomChange(){
 		var isChecked = skipRadRoomCheckbox.is(':checked');
-		debugger;
-		chrome.storage.sync.set({skipRadRoomEnabled: isChecked}, function(){
-			showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
+		getSettings(function(settings){
+			settings.skipRadRoomEnabled = isChecked;
+			chrome.storage.sync.set({settings : settings}, function(a){
+				showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
+			});
+		});
+	}
+
+	function onEnableRememberLastPage(){
+		var isChecked = rememberLastPage.is(':checked');
+			getSettings(function(settings){
+				debugger;
+				settings.rememberLastPage = isChecked;
+				chrome.storage.sync.set({settings : settings}, function(a){
+					showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
+			});
+		});	
+	}
+
+	function toggleDisabledSubMenus(showAsdisabled){
+		$.each([skipRadRoomCheckbox, rememberLastPage], function(checkbox, a, e){
+			a.prop('disabled', showAsdisabled);
 		});
 	}
 
@@ -40,4 +71,6 @@ $(function(){
 		$('#message').html(message).show();
 	}
 
-});
+	return PageAction;
+
+})(Coon.PageAction || {});

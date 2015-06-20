@@ -47,14 +47,15 @@
 	position: fixed;
 	top: 0;
 	bottom: 0;
-	left: -200%;
+	left: -230px;
 	width: 220px;
 	z-index: 120;
 	background-color: white;
 	box-shadow: rgba(0, 0, 0, 0.2) 3px 0px 10px;
 
-	transition: all 0.2s;
-	transition-delay: 0.05s;
+	transition: all 0.3s;
+	transition-delay: 0.2s;
+	
 }
 
 #coon-navbar-overlay {
@@ -94,9 +95,10 @@
 	border-bottom: 1px solid #ABA8A8;
 	height: 160px;
 	width: 100%;
+	display: block;
 	box-sizing: border-box;
 }
-#coon-navbar-content-header > div {
+#coon-navbar-content-header-background {
 	background: #fff url('chrome-extension://__MSG_@@extension_id__/src/img/coon_background.jpg');
 	background-repeat: no-repeat;
 	background-position: center center;

@@ -19,3 +19,10 @@
 #message {
 	display: none;
 }
+#coon-settings label {
+	margin-bottom: 3px;
+}
+
+#coon-settings .sub-settings {
+	margin-left: 26px;
+}

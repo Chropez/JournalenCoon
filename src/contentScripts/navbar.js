@@ -14,8 +14,8 @@ Coon.Navbar = (function(Navbar, Utils){
 		_hasLoaded = false ; // Not used yet
 
 	// variables
-	var _baseUrl = "/",
-		_afterLoadEventQueue = [];
+	var _afterLoadEventQueue = [];
+	var _afterLoginEventQueue = [];
 
 	
 	// ---------------------------------------
@@ -25,8 +25,12 @@ Coon.Navbar = (function(Navbar, Utils){
 	// Public Elements
 	Navbar.navbarUserList ;
 	
-	// Public state
-	Navbar.isAdmin = false ;	
+	Navbar.isAdmin = false ;
+
+	/// See #Navbar.afterLogin
+	Navbar.redirectUrl ; 
+
+	var _baseUrl = Utils.getBaseUrl();	
 
 
 	// ---------------------------------------
@@ -36,10 +40,11 @@ Coon.Navbar = (function(Navbar, Utils){
 	// Inits 
 	Navbar.init = function () {
 		createElements();
-		findBaseUrl();
 		loadData();
+		addAfterLoginLitseners();
 	} ;
 
+	/// Functions that run after the navbar is done loading
 	Navbar.afterLoad = function(fn) {
 		if(_hasLoaded) 
 			fn();
@@ -47,6 +52,12 @@ Coon.Navbar = (function(Navbar, Utils){
 		_afterLoadEventQueue.push(fn);
 	};
 
+	/// Intercepts the normal login link and runs the function passed in.
+	/// That function can set the variable Navbar.redirectUrl 
+	/// to redirect to a certain page.
+	Navbar.afterLogin = function(fn) {
+		_afterLoginEventQueue.push(fn);
+	}
 
 	// ---------------------------------------
 	// Private methods
@@ -75,19 +86,9 @@ Coon.Navbar = (function(Navbar, Utils){
 	            _navbarWrapper.removeClass("active");
 	        });
 
-	    var coonHeader = $('<div id="coon-navbar-content-header"><div></div></div>').appendTo(_navbar);
+	    var coonHeader = $('<a href="' + _baseUrl + '" id="coon-navbar-content-header"><div id="coon-navbar-content-header-background"></div></a>').appendTo(_navbar);
 	} ;
 
-	var findBaseUrl = function(){
-		var vars = 	Utils.getWindowVariables(["Jpn.Shared.BaseUrl", "Jpn.Admin.Shared.BaseUrl"]);
-		_baseUrl = 	vars ? 
-                    vars["Jpn.Shared.BaseUrl"] ? 
-                        vars["Jpn.Shared.BaseUrl"] : 
-                        vars["Jpn.Admin.Shared.BaseUrl"] ? 
-                            vars["Jpn.Admin.Shared.BaseUrl"] : 
-                            _baseUrl
-                    : _baseUrl ;
-	};
 
 	var loadData = function(){
 		$.get(_baseUrl)
@@ -141,7 +142,60 @@ Coon.Navbar = (function(Navbar, Utils){
 		});
 	};
 
+	var addAfterLoginLitseners = function() {
+		Navbar.afterLoad(function(){
+			$('a', Navbar.navbarUserList).on('click', function(e){
+				if(_afterLoginEventQueue.length < 1) return; 
 
+				e.preventDefault();
+				var $a = $(this),
+				linkUrl = $a.prop('href');
+
+	        	showLoadingLink($a);
+
+		        var login = $.get(linkUrl);
+		        var cbPromises = [];
+
+		        _afterLoginEventQueue.forEach(function(fn){
+		        	var cbDeferred = $.Deferred();
+		        	cbPromises.push(cbDeferred);
+
+        			login.then(function(data){
+        				if(!Navbar.redirectUrl){
+	        				fn.apply(this, [data]);
+	        				cbDeferred.resolve();
+        				} else {
+	        				$.get(Navbar.redirectUrl).then(function(data){
+	        					fn.apply(this, [data]);		
+		        				cbDeferred.resolve();
+        					});
+		        		}
+    				});
+		        });
+
+
+		        $.when.apply($, cbPromises).done(function(){
+			        window.location.replace(Navbar.redirectUrl || linkUrl);
+		        });
+			});
+		});
+
+
+
+		        /*, function(data) {
+		            var html = $($.parseHTML(data));
+		            var btnLink = $('#RespiteOffButton', html).prop('href');
+					var promise = $.get()
+				}	*/
+	};
+
+	var showLoadingLink = function(element) {
+		//todo
+	};
+
+	var hideLoadingLink = function(element){
+		//todo
+	};
 
 	// Return this object
 	return Navbar;

@@ -1,52 +1,28 @@
 var Coon = Coon || {};
-Coon.SkipRadRoom = (function(SkipRadRoom, Navbar){
+Coon.SkipRadRoom = (function(SkipRadRoom, Navbar, Utils){
 	'use strict';
 
-	// Private vars
-
-	// Public vars
+	// Public variables
+	SkipRadRoom.thenGoTo ;
 
 	// Public methods
 	SkipRadRoom.init = function(){
-		Navbar.afterLoad(init); // Run only after navbar has loaded
-	};
-
-	// Private methods
-	var init = function(){
-		if(Navbar.isAdmin) return; // No Radroom to skip when you're admin
-
+		var baseUrlObj = Utils.getBaseUrl(true);
+		if(baseUrlObj.isAdmin) return; // No Radroom to skip when you're admin
+		
 		interceptLinks();
 	};
 
+	// Private methods
 	var interceptLinks = function() {
-		$('a', Navbar.navbarUserList).on('click', function(e){
-	        e.preventDefault();
-	        var $this = $(this),
-	         thisLink = $this.prop('href');
+		Navbar.afterLogin(function(data){
+            var html = $($.parseHTML(data)),
+            btnLink  = $('#RespiteOffButton', html).prop('href');
 
-	        showLoadingLink($this);
-
-	        $.get(thisLink, function(data) {
-	            var html = $($.parseHTML(data));
-	            var btnLink = $('#RespiteOffButton', html).prop('href');
-	            window.location.replace(btnLink);
-	        }).then(function(){
-				hideLoadingLink($this) ;
-	        });
-
-
-
-	    });
-	};
-
-	var showLoadingLink = function(element) {
-		//todo
-	};
-
-	var hideLoadingLink = function(element){
-		//todo
+            Navbar.redirectUrl = btnLink;
+		});
 	};
 
 	return SkipRadRoom;
 
-})(Coon.SkipRadRoom || {}, Coon.Navbar);
+})(Coon.SkipRadRoom || {}, Coon.Navbar, Coon.Utils);

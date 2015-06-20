@@ -1,6 +1,6 @@
 {
   "name": "Journalen Coon",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "manifest_version": 2,
   "description": "The Coon takes over Journalen!",
   "homepage_url": "http://en.wikipedia.org/wiki/The_Coon",
@@ -21,7 +21,8 @@
     "default_popup": "src/page_action/page_action.html"
   },
   "permissions": [
-    "storage"
+    "storage",
+    "tabs"
   ],
   "content_scripts": [
     {
@@ -51,8 +52,9 @@
       "js": [
         "js/jquery/jquery.min.js",
         "src/contentScripts/utils.js",
-        "src/contentScripts/navbar2.js",
-        "src/contentScripts/skipRadroom.js",
+        "src/contentScripts/navbar.js",
+        "src/contentScripts/skipRadRoom.js",
+        "src/contentScripts/rememberLastPage.js",
         "src/contentScripts/main.js"
       ]
     }

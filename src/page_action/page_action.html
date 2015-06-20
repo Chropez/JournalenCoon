@@ -12,17 +12,23 @@
 
 	<h3>Journalen Coon!</h3>
 
-	<div id="coon-is-on" class="checkbox">
+	<div id="coon-settings" class="checkbox">
 	    <label>
-	      <input type="checkbox" id="enable-navbar"> Enable the Coon navbar
+	      <input type="checkbox" id="enable-navbar"> Enable the <b>Coon navbar</b>
 	    </label>
 
-	    <label>
-	      <input type="checkbox" id="enable-skip-radroom"> Allow <b>The Coon</b> to skip Rådrum!
-	    </label>
+		<div class="sub-settings">
+		    <label>
+		      <input type="checkbox" id="enable-skip-radroom"> Allow <b>The Coon</b> to skip Rådrum!
+		    </label>
+
+		    <label>
+		      <input type="checkbox" id="remember-last-page"> Allow <b>The Coon</b> to remember the last page you were on!
+		    </label>
+	    </div>
 	 </div>
 	
-	<div style="height: 90px">
+	<div style="height: 70px">
 		<div class="alert alert-warning" id="message" role="alert">
 	     	
 	    </div>

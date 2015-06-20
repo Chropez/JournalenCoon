@@ -1,14 +1,52 @@
-// if you checked "fancy-settings" in extensionizr.com, uncomment this lines
-
+// Uncomment "fancy-settings"  are used
 // var settings = new Store("settings", {
 //     "sample_setting": "This is how you use Store.js to remember values"
 // });
 
-(function(){
+var Coon = Coon || {};
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  	chrome.pageAction.show(sender.tab.id);
-});
+Coon.Background = (function(){
+    'use strict';
+
+    return {
+        init: init ,
+        getSettings : getSettings
+    }
+
+    function init() {
+        // Intecepts all messages
+        chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {      
+            // Show coon on adressbar
+            chrome.pageAction.show(sender.tab.id); 
+
+            var action = request.action ;
+            if(!action) return false;
+
+            switch(action) {
+                case 'settings':
+                    getSettings(sendResponse);
+                    return true;
+                default:
+                    return false;
+            }
+        });
+    }
+
+    function getSettings(sendResponse) {
+        chrome.storage.sync.get({ settings: Coon.Settings }, function (res) {
+            var settings = $.extend(settings, Coon.Settings, res.settings);
+            sendResponse( settings );
+        });
+    }
+
+})();
+
+Coon.Background.init();
+
+
+
+
+
 
 /* Not necessary yet
 chrome.runtime.onInstalled.addListener(function(details){
@@ -17,7 +55,7 @@ chrome.runtime.onInstalled.addListener(function(details){
     }else if(details.reason == "update"){
         var thisVersion = chrome.runtime.getManifest().version;
         if(details.previousVersion < "0.4.0") {
-        	chrome.storage.sync.clear(function(){
+            chrome.storage.sync.clear(function(){
                 debugger;
                 chrome.storage.sync.get('settings', function(a){
                     debugger;
@@ -28,7 +66,3 @@ chrome.runtime.onInstalled.addListener(function(details){
         console.log("Updated from " + details.previousVersion + " to " + thisVersion + "!");
     }
 });*/
-
-})();
-
-
