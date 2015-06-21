@@ -32,7 +32,7 @@ Coon.PageAction = (function(PageAction){
 
 		getSettings(function(settings){
 			settings.navbarEnabled = isChecked;
-			chrome.storage.sync.set({settings : settings}, function(a){
+			chrome.storage.sync.set({settings : settings}, function(){
 				showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
 			});
 		});
@@ -53,17 +53,16 @@ Coon.PageAction = (function(PageAction){
 	function onEnableRememberLastPage(){
 		var isChecked = rememberLastPage.is(':checked');
 			getSettings(function(settings){
-				debugger;
 				settings.rememberLastPage = isChecked;
-				chrome.storage.sync.set({settings : settings}, function(a){
+				chrome.storage.sync.set({settings : settings}, function(){
 					showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
 			});
 		});	
 	}
 
 	function toggleDisabledSubMenus(showAsdisabled){
-		$.each([skipRadRoomCheckbox, rememberLastPage], function(checkbox, a, e){
-			a.prop('disabled', showAsdisabled);
+		$.each([skipRadRoomCheckbox, rememberLastPage], function(i, checkbox){
+			checkbox.prop('disabled', showAsdisabled);
 		});
 	}
 

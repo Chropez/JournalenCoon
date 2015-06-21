@@ -5,7 +5,9 @@ Coon.SkipRadRoom = (function(SkipRadRoom, Navbar, Utils){
 	// Public methods
 	SkipRadRoom.init = function(){
 		var baseUrlObj = Utils.getBaseUrl(true);
-		if(baseUrlObj.isAdmin) return; // No Radroom to skip when you're admin
+		if(baseUrlObj.isAdmin) {
+			return; // No Radroom to skip when you're admin
+		}
 		
 		interceptLinks();
 	};

@@ -10,8 +10,7 @@ Coon.Navbar = (function(Navbar, Utils){
 	var _navbar, _navbarWrapper ; 
 	
 	// State
-	var _isVisible = false , 
-		_hasLoaded = false ; // Not used yet
+	var _hasLoaded = false ; // Not used yet
 
 	// variables
 	var _afterLoadEventQueue = [];
@@ -23,12 +22,12 @@ Coon.Navbar = (function(Navbar, Utils){
 	// ---------------------------------------
 
 	// Public Elements
-	Navbar.navbarUserList ;
+	Navbar.navbarUserList = undefined;
 	
 	Navbar.isAdmin = false ;
 
 	/// See #Navbar.afterLogin
-	Navbar.redirectUrl ; 
+	Navbar.redirectUrl = undefined; 
 
 	var _baseUrl = Utils.getBaseUrl();	
 
@@ -46,8 +45,9 @@ Coon.Navbar = (function(Navbar, Utils){
 
 	/// Functions that run after the navbar is done loading
 	Navbar.afterLoad = function(fn) {
-		if(_hasLoaded) 
+		if(_hasLoaded)  {
 			fn();
+		}
 
 		_afterLoadEventQueue.push(fn);
 	};
@@ -57,7 +57,7 @@ Coon.Navbar = (function(Navbar, Utils){
 	/// to redirect to a certain page.
 	Navbar.afterLogin = function(fn) {
 		_afterLoginEventQueue.push(fn);
-	}
+	} ;
 
 	// ---------------------------------------
 	// Private methods
@@ -73,8 +73,9 @@ Coon.Navbar = (function(Navbar, Utils){
 	        _navbarWrapper.addClass('active');
 	    }, function(){
 	        setTimeout(function(){
-	            if(!_navbar.is(':hover'))
+	            if(!_navbar.is(':hover')){
 	                _navbarWrapper.removeClass('active');     
+	            }
 	        },100);
 	    });
 
@@ -116,7 +117,7 @@ Coon.Navbar = (function(Navbar, Utils){
 	                name	: tds.eq(1).text().trim(),
 	                county	: tds.eq(2).text().trim(),
 	                logins	: parseInt(tds.eq(3).text().trim())
-	            }
+	            } ;
 	        }
 	    });
 	    
@@ -125,7 +126,7 @@ Coon.Navbar = (function(Navbar, Utils){
 
 	var renderUsers = function(users) {
 		Navbar.navbarUserList = $('<ul id="coon-navbar-user-list"></ul>').appendTo(_navbar);
-	    users = users.sort(function(a,b) { var a=a.logins, b=b.logins; return a==b?0: a>b ? -1:1; });
+	    users = users.sort(function(a,b) { a=a.logins, b=b.logins; return a===b?0: a>b ? -1:1; });
 	    $.each(users, function(i, user){
 	        var li = $('<li>');
 	        var title = ""+ user.pnr + "\nLän: " + user.county + "\nInloggningar: " + user.logins ;
@@ -145,7 +146,7 @@ Coon.Navbar = (function(Navbar, Utils){
 	var addAfterLoginLitseners = function() {
 		Navbar.afterLoad(function(){
 			$('a', Navbar.navbarUserList).on('click', function(e){
-				if(_afterLoginEventQueue.length < 1) return; 
+				if(_afterLoginEventQueue.length < 1) { return; } 
 
 				e.preventDefault();
 				var $a = $(this),
@@ -187,14 +188,6 @@ Coon.Navbar = (function(Navbar, Utils){
 		            var btnLink = $('#RespiteOffButton', html).prop('href');
 					var promise = $.get()
 				}	*/
-	};
-
-	var showLoadingLink = function(element) {
-		//todo
-	};
-
-	var hideLoadingLink = function(element){
-		//todo
 	};
 
 	// Return this object
