@@ -2,9 +2,6 @@ var Coon = Coon || {};
 Coon.SkipRadRoom = (function(SkipRadRoom, Navbar, Utils){
 	'use strict';
 
-	// Public variables
-	SkipRadRoom.thenGoTo ;
-
 	// Public methods
 	SkipRadRoom.init = function(){
 		var baseUrlObj = Utils.getBaseUrl(true);

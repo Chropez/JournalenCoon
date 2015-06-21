@@ -14,7 +14,6 @@
     "page": "src/background/background.html",
     "persistent": false
   },
-  "options_page": "src/options_custom/index.html",
   "page_action": {
     "default_icon": "icons/icon19.png",
     "default_title": "Journalen Coon!",

@@ -4,11 +4,13 @@
 		if( settings.navbarEnabled ){
         	Coon.Navbar.init();
 
-			if( settings.skipRadRoomEnabled )
+			if( settings.skipRadRoomEnabled ){
 				Coon.SkipRadRoom.init();
+			}
 
-			if( settings.rememberLastPage ) 
+			if( settings.rememberLastPage ) {
 				Coon.RememberLastPage.init();
+			}
 		}
 	
 	});

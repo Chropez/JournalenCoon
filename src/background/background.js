@@ -11,7 +11,7 @@ Coon.Background = (function(){
     return {
         init: init ,
         getSettings : getSettings
-    }
+    };
 
     function init() {
         // Intecepts all messages
@@ -20,7 +20,7 @@ Coon.Background = (function(){
             chrome.pageAction.show(sender.tab.id); 
 
             var action = request.action ;
-            if(!action) return false;
+            if(!action) { return false; }
 
             switch(action) {
                 case 'settings':

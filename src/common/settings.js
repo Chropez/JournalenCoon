@@ -7,5 +7,5 @@ Coon.Settings = (function(){
 		navbarEnabled : true ,
 		skipRadRoomEnabled : false,
 		rememberLastPage : true
-	}
+	} ;
 })();

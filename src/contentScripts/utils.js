@@ -4,12 +4,12 @@ Coon.Utils = (function(Utils, Navbar){
 
     Utils.getWindowVariables = function(variables) {
         try {
-            var ret = {};
+            var ret = {}, currVariable, i ;
 
             var scriptContent = "";
-            for (var i = 0; i < variables.length; i++) {
-                var currVariable = variables[i];
-                scriptContent += "try { if (typeof " + currVariable + " !== 'undefined') $('body').attr('tmp_" + currVariable + "', " + currVariable + ");\n} catch(err) { }"
+            for (i = 0; i < variables.length; i++) {
+                currVariable = variables[i];
+                scriptContent += "try { if (typeof " + currVariable + " !== 'undefined') $('body').attr('tmp_" + currVariable + "', " + currVariable + ");\n} catch(err) { }";
             }
 
             var script = document.createElement('script');
@@ -17,8 +17,8 @@ Coon.Utils = (function(Utils, Navbar){
             script.appendChild(document.createTextNode(scriptContent));
             (document.body || document.head || document.documentElement).appendChild(script);
 
-            for (var i = 0; i < variables.length; i++) {
-                var currVariable = variables[i];
+            for (i = 0; i < variables.length; i++) {
+                currVariable = variables[i];
                 ret[currVariable] = $("body").attr("tmp_" + currVariable);
                 $("body").removeAttr("tmp_" + currVariable);
             }
@@ -45,8 +45,9 @@ Coon.Utils = (function(Utils, Navbar){
                             undefined
                     : undefined ;
 
-        if(!returnDetails)
+        if(!returnDetails) {
             return baseUrl || defaultBaseUrl;
+        }
 
         var returnObj = {};
 
@@ -54,10 +55,11 @@ Coon.Utils = (function(Utils, Navbar){
         returnObj.url = baseUrl ? defaultBaseUrl + baseUrl : defaultBaseUrl; //fullUrl
         returnObj.isFromJournalen = (baseUrl !== undefined) || false;
 
-        if(vars && returnObj.isFromJournalen)
+        if(vars && returnObj.isFromJournalen) {
             returnObj.isAdmin = (vars["Jpn.Admin.Shared.BaseUrl"] !== undefined) || false;
+        }
 
-        return returnObj
+        return returnObj;
     };
 
     return Utils;
