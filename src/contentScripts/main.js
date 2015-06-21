@@ -8,9 +8,13 @@
 				Coon.SkipRadRoom.init();
 			}
 
-			if( settings.rememberLastPage ) {
+			if( settings.rememberLastPageEnabled ) {
 				Coon.RememberLastPage.init();
 			}
+		}
+
+		if( settings.keepMeLoggedInEnabled ){ 
+			Coon.KeepMeLoggedIn.init();
 		}
 	
 	});

@@ -152,7 +152,7 @@ Coon.Navbar = (function(Navbar, Utils){
 				var $a = $(this),
 				linkUrl = $a.prop('href');
 
-	        	showLoadingLink($a);
+	        	//showLoadingLink($a);
 
 		        var login = $.get(linkUrl);
 		        var cbPromises = [];

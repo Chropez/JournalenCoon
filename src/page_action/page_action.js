@@ -7,21 +7,24 @@ Coon.PageAction = (function(PageAction){
 	// Private settings
 	var navbarCheckbox = $('#enable-navbar'),
 	skipRadRoomCheckbox = $('#enable-skip-radroom'),
-	rememberLastPage = $('#remember-last-page');
+	rememberLastPageCheckbox = $('#enable-remember-last-page'),
+	keepMeLoggedInCheckbox = $('#enable-keep-me-logged-in');
 
 	initSettings();
 
 	// Litseners
 	navbarCheckbox.on('change', onEnableNavbarChange);
 	skipRadRoomCheckbox.on('change', onEnableSkipRadRoomChange);
-	rememberLastPage.on('change', onEnableRememberLastPage);
+	rememberLastPageCheckbox.on('change', onEnableRememberLastPageChange);
+	keepMeLoggedInCheckbox.on('change', onEnableKeepMeLoggedInChange);
 
 	//Functions
 	function initSettings() {
 		getSettings(function(settings) {
 			navbarCheckbox.prop('checked', settings.navbarEnabled);
 			skipRadRoomCheckbox.prop('checked', settings.skipRadRoomEnabled);
-			rememberLastPage.prop('checked', settings.rememberLastPage);
+			rememberLastPageCheckbox.prop('checked', settings.rememberLastPageEnabled);
+			keepMeLoggedInCheckbox.prop('checked', settings.keepMeLoggedInEnabled);
 
 			toggleDisabledSubMenus(!settings.navbarEnabled);
 		});
@@ -50,10 +53,20 @@ Coon.PageAction = (function(PageAction){
 		});
 	}
 
-	function onEnableRememberLastPage(){
-		var isChecked = rememberLastPage.is(':checked');
+	function onEnableRememberLastPageChange(){
+		var isChecked = rememberLastPageCheckbox.is(':checked');
 			getSettings(function(settings){
-				settings.rememberLastPage = isChecked;
+				settings.rememberLastPageEnabled = isChecked;
+				chrome.storage.sync.set({settings : settings}, function(){
+					showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
+			});
+		});	
+	}
+
+	function onEnableKeepMeLoggedInChange(){
+		var isChecked = keepMeLoggedInCheckbox.is(':checked');
+			getSettings(function(settings){
+				settings.keepMeLoggedInEnabled = isChecked;
 				chrome.storage.sync.set({settings : settings}, function(){
 					showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
 			});
@@ -61,7 +74,7 @@ Coon.PageAction = (function(PageAction){
 	}
 
 	function toggleDisabledSubMenus(showAsdisabled){
-		$.each([skipRadRoomCheckbox, rememberLastPage], function(i, checkbox){
+		$.each([skipRadRoomCheckbox, rememberLastPageCheckbox], function(i, checkbox){
 			checkbox.prop('disabled', showAsdisabled);
 		});
 	}

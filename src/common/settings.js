@@ -6,6 +6,7 @@ Coon.Settings = (function(){
 	return {
 		navbarEnabled : true ,
 		skipRadRoomEnabled : false,
-		rememberLastPage : true
+		rememberLastPageEnabled : true,
+		keepMeLoggedInEnabled : false
 	} ;
 })();

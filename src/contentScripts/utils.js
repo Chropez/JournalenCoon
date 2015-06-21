@@ -2,6 +2,13 @@ var Coon = Coon || {};
 Coon.Utils = (function(Utils, Navbar){
     'use strict';
 
+    var _baseUrl = undefined;
+
+    var init = function(){
+        calculateBaseUrl();
+    }
+
+
     Utils.getWindowVariables = function(variables) {
         try {
             var ret = {}, currVariable, i ;
@@ -35,6 +42,14 @@ Coon.Utils = (function(Utils, Navbar){
     /// Gets the baseUrl from Journalen using their existing js-variable
     /// If the returnDetails param is passed then an object will be returned
     Utils.getBaseUrl = function(returnDetails) {
+        if(!returnDetails) {
+            return _baseUrl.baseUrl || _baseUrl.defaultBaseUrl;
+        } else {
+            return _baseUrl;
+        }       
+    };
+
+    var calculateBaseUrl = function(){
         var defaultBaseUrl = location.protocol + "//" + location.host;
         var vars =  Utils.getWindowVariables(["Jpn.Shared.BaseUrl", "Jpn.Admin.Shared.BaseUrl"]);
         var baseUrl =  vars ? 
@@ -45,22 +60,20 @@ Coon.Utils = (function(Utils, Navbar){
                             undefined
                     : undefined ;
 
-        if(!returnDetails) {
-            return baseUrl || defaultBaseUrl;
+
+        _baseUrl = {};
+        _baseUrl.defaultBaseUrl = defaultBaseUrl ;
+        _baseUrl.baseUrl = baseUrl || defaultBaseUrl ;
+        _baseUrl.url = baseUrl ? defaultBaseUrl + baseUrl : defaultBaseUrl; //fullUrl
+        _baseUrl.isFromJournalen = (baseUrl !== undefined) || false;
+
+        if(vars && _baseUrl.isFromJournalen) {
+            _baseUrl.isAdmin = (vars["Jpn.Admin.Shared.BaseUrl"] !== undefined) || false;
         }
 
-        var returnObj = {};
-
-        returnObj.baseUrl = baseUrl || defaultBaseUrl;
-        returnObj.url = baseUrl ? defaultBaseUrl + baseUrl : defaultBaseUrl; //fullUrl
-        returnObj.isFromJournalen = (baseUrl !== undefined) || false;
-
-        if(vars && returnObj.isFromJournalen) {
-            returnObj.isAdmin = (vars["Jpn.Admin.Shared.BaseUrl"] !== undefined) || false;
-        }
-
-        return returnObj;
     };
+
+    init();
 
     return Utils;
 
