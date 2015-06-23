@@ -1,0 +1,44 @@
+<script type="text/x-handlebars-template" data-template-id="coon-navbar">
+		<div id="coon-navbar-content">
+			<a href="{{homeLink}}" id="coon-navbar-content-header">
+				<div id="coon-navbar-content-header-background"></div>
+			</a>
+			
+			<ul id="coon-navbar-user-list">
+				{{#if isAdmin}}
+					{{#each users}}
+						<li>
+							<a href="{{link}}">{{name}}</a>
+							{{!-- <span class="secondary-text auths">{{auths}}</span> --}}
+						</li>
+
+					{{else}}
+						No users found
+					{{/each}}
+				
+				{{else}}
+					{{#each users}}
+						<li>
+							<a href="{{link}}">{{name}}</a>
+							<span class="secondary-text pnr">{{pnr}}</span>
+						</li>
+
+					{{else}}
+						No users found
+					{{/each}}
+				{{/if}}
+			</ul>
+			<br>
+			
+
+
+
+		</div>
+
+
+		<div id="coon-navbar-overlay"></div>
+
+   		<div id="coon-navbar-hoverarea">
+   			<div id="coon-navbar-hoverarea-trigger"></div>
+   		</div>
+</script>

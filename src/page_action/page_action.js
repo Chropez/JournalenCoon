@@ -1,16 +1,15 @@
 var Coon = Coon || {};
 
-var getSettings = chrome.extension.getBackgroundPage().Coon.Background.getSettings;
-
 Coon.PageAction = (function(PageAction){
 	'use strict';
 	// Private settings
+	var _getSettings = undefined;
+
 	var navbarCheckbox = $('#enable-navbar'),
 	skipRadRoomCheckbox = $('#enable-skip-radroom'),
 	rememberLastPageCheckbox = $('#enable-remember-last-page'),
 	keepMeLoggedInCheckbox = $('#enable-keep-me-logged-in');
 
-	initSettings();
 
 	// Litseners
 	navbarCheckbox.on('change', onEnableNavbarChange);
@@ -19,8 +18,10 @@ Coon.PageAction = (function(PageAction){
 	keepMeLoggedInCheckbox.on('change', onEnableKeepMeLoggedInChange);
 
 	//Functions
-	function initSettings() {
-		getSettings(function(settings) {
+	PageAction.init = function(getSettings) {
+		_getSettings = getSettings;
+
+		_getSettings(function(settings) {
 			navbarCheckbox.prop('checked', settings.navbarEnabled);
 			skipRadRoomCheckbox.prop('checked', settings.skipRadRoomEnabled);
 			rememberLastPageCheckbox.prop('checked', settings.rememberLastPageEnabled);
@@ -33,7 +34,7 @@ Coon.PageAction = (function(PageAction){
 	function onEnableNavbarChange(){
 		var isChecked = navbarCheckbox.is(':checked');
 
-		getSettings(function(settings){
+		_getSettings(function(settings){
 			settings.navbarEnabled = isChecked;
 			chrome.storage.sync.set({settings : settings}, function(){
 				showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
@@ -45,7 +46,7 @@ Coon.PageAction = (function(PageAction){
 
 	function onEnableSkipRadRoomChange(){
 		var isChecked = skipRadRoomCheckbox.is(':checked');
-		getSettings(function(settings){
+		_getSettings(function(settings){
 			settings.skipRadRoomEnabled = isChecked;
 			chrome.storage.sync.set({settings : settings}, function(a){
 				showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
@@ -55,7 +56,7 @@ Coon.PageAction = (function(PageAction){
 
 	function onEnableRememberLastPageChange(){
 		var isChecked = rememberLastPageCheckbox.is(':checked');
-			getSettings(function(settings){
+			_getSettings(function(settings){
 				settings.rememberLastPageEnabled = isChecked;
 				chrome.storage.sync.set({settings : settings}, function(){
 					showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
@@ -65,7 +66,7 @@ Coon.PageAction = (function(PageAction){
 
 	function onEnableKeepMeLoggedInChange(){
 		var isChecked = keepMeLoggedInCheckbox.is(':checked');
-			getSettings(function(settings){
+			_getSettings(function(settings){
 				settings.keepMeLoggedInEnabled = isChecked;
 				chrome.storage.sync.set({settings : settings}, function(){
 					showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
@@ -86,3 +87,7 @@ Coon.PageAction = (function(PageAction){
 	return PageAction;
 
 })(Coon.PageAction || {});
+
+chrome.runtime.getBackgroundPage(function(bgPage){
+	Coon.PageAction.init(bgPage.Coon.Background.getSettings);
+});

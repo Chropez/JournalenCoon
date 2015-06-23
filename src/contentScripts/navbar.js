@@ -7,14 +7,20 @@ Coon.Navbar = (function(Navbar, Utils){
 	// ---------------------------------------
 
 	// Elements
-	var _navbar, _navbarWrapper ; 
+	var $navbarWrapper, $navbar, $userList, $hoverAreaTrigger ;
 	
 	// State
-	var _hasLoaded = false ; // Not used yet
+	var _hasLoaded = false , 
+		_isAdmin   = false ;
 
 	// variables
-	var _afterLoadEventQueue = [];
-	var _afterLoginEventQueue = [];
+	var _afterLoadEventQueue  = [] ,
+		_afterLoginEventQueue = [] ;
+
+	var _allUsers = [];
+
+	// Rendering
+	var _template ;
 
 	
 	// ---------------------------------------
@@ -22,9 +28,7 @@ Coon.Navbar = (function(Navbar, Utils){
 	// ---------------------------------------
 
 	// Public Elements
-	Navbar.navbarUserList = undefined;
 	
-	Navbar.isAdmin = false ;
 
 	/// See #Navbar.afterLogin
 	Navbar.redirectUrl = undefined; 
@@ -38,9 +42,11 @@ Coon.Navbar = (function(Navbar, Utils){
 
 	// Inits 
 	Navbar.init = function () {
-		createElements();
-		loadData();
-		addAfterLoginLitseners();
+		//createElements();
+		renderNavbar()
+			.then(addEventHandlers)
+			.then(loadData)
+			.then(addAfterLoginListeners) ;
 	} ;
 
 	/// Functions that run after the navbar is done loading
@@ -63,38 +69,65 @@ Coon.Navbar = (function(Navbar, Utils){
 	// Private methods
 	// ---------------------------------------
 
-	var createElements = function() {
-	    _navbarWrapper = $('<div id="coon-navbar"></div>').prependTo('body');
+	var renderNavbar = function(){
+		var views = chrome.extension.getURL('src/contentScripts/views.html');
+		return $.get(views).then(function(data){
+		    var $html = $('<div>').html(data);
+		    var source = $html.find('[data-template-id="coon-navbar"]').html();
+		    _template = Handlebars.compile(source);
 
-	    var hoverArea = $('<div id="coon-navbar-hoverarea">').prependTo(_navbarWrapper);
-	    var hoverAreaTrigger = $('<div id="coon-navbar-hoverarea-trigger">').appendTo(hoverArea);
-	    
-	    hoverAreaTrigger.hover(function(){
-	        _navbarWrapper.addClass('active');
+		    var viewModel = createViewModel();
+		    var html = _template(viewModel);
+
+		    $('<div id="coon-navbar">')
+		    	.append(html)
+		    	.prependTo('body');
+
+	    	$navbarWrapper = $('#coon-navbar');
+	    	$navbar = $('#coon-navbar-content');
+	    	$userList = $('#coon-navbar-user-list');
+	    	$hoverAreaTrigger = $('#coon-navbar-hoverarea-trigger');
+		});
+	};
+
+	var addEventHandlers = function(){
+		// Trigger area shows the navbar on hover
+		debugger;
+		$hoverAreaTrigger.hover(function(){
+	        $navbarWrapper.addClass('active');
 	    }, function(){
 	        setTimeout(function(){
-	            if(!_navbar.is(':hover')){
-	                _navbarWrapper.removeClass('active');     
+	            if(!$navbar.is(':hover')){
+	                $navbarWrapper.removeClass('active');    
 	            }
 	        },100);
 	    });
 
-	    var overlay = $('<div id="coon-navbar-overlay"></div>').prependTo(_navbarWrapper);
+	    $navbar.mouseleave(function(){
+            $navbarWrapper.removeClass("active"); 
+        });
+	};
+	var createViewModel = function(viewModel){
+		var defaultViewModel = {
+		    	isAdmin  : _isAdmin , 
+		    	homeLink : _baseUrl ,
+		    	users 	 : _allUsers
+		    };
 
-	    _navbar = $('<div id="coon-navbar-content"></div>')
-	        .prependTo(_navbarWrapper)
-	        .mouseleave(function(){
-	            _navbarWrapper.removeClass("active");
-	        });
+		if(viewModel) 
+			return $.extend({}, defaultViewModel, viewModel);
 
-	    var coonHeader = $('<a href="' + _baseUrl + '" id="coon-navbar-content-header"><div id="coon-navbar-content-header-background"></div></a>').appendTo(_navbar);
-	} ;
+		return defaultViewModel;
+	};
 
+	var reRenderUsers = function(viewModel){
+		var html = _template(viewModel);
+		$userList.html(html);
+	};
 
 	var loadData = function(){
 		$.get(_baseUrl)
 			.then(retrieveUsers)
-			.then(renderUsers)
 			.then(setAsLoaded);
 	};
 
@@ -103,37 +136,53 @@ Coon.Navbar = (function(Navbar, Utils){
 	    var html = $("<div></div>").html(htmlResponse),
 	        rows = html.find('tr');
 
-	    Navbar.isAdmin = html.find('.container>h2').children().length === 0;
+	    _isAdmin = html.find('.container>h2').children().length === 0;
 
-	    var users = $.map(rows, function(row){
-	        var tds = $(row).find('td');
-	        var link = Navbar.isAdmin 
-	                    ? tds.eq(1).find('a').attr('href') 
-	                    : tds.eq(0).find('a').attr('href');
-	        if(tds.length>0){
-	            return {
-	                pnr 	: tds.eq(0).text().trim(),
-	                link	: link,
-	                name	: tds.eq(1).text().trim(),
-	                county	: tds.eq(2).text().trim(),
-	                logins	: parseInt(tds.eq(3).text().trim())
-	            } ;
-	        }
-	    });
-	    
-	    return users;
+	    if(!_isAdmin){
+			_allUsers = $.map(rows, function(row){
+		        var tds = $(row).find('td');
+		        if(tds.length>0){
+		            return {
+		                pnr 	: tds.eq(0).text().trim(),
+		                link	: tds.eq(0).find('a').attr('href'),
+		                name	: tds.eq(1).text().trim(),
+		                county	: tds.eq(2).text().trim(),
+		                logins	: parseInt(tds.eq(3).text().trim())
+		            } ;
+		        }
+		    });
+	    }else {
+	    	_allUsers = $.map(rows, function(row){
+		        var tds = $(row).find('td');
+		        if(tds.length>0){
+
+		        	var auths = tds.eq(3).find('ul li').map(function(){
+		        		return $(this).text().trim();
+		        	});
+		            return {
+		                link	: tds.eq(1).find('a').attr('href'),
+		                name	: tds.eq(1).text().trim(),
+		                auths	: auths,
+		                logins	: parseInt(tds.eq(4).text().trim())
+		            } ;
+		        }
+		    });
+	    }
+
+	    sortUsers();
+	    var viewModel = createViewModel();
+	    reRenderUsers(viewModel);
+
 	};
 
-	var renderUsers = function(users) {
-		Navbar.navbarUserList = $('<ul id="coon-navbar-user-list"></ul>').appendTo(_navbar);
-	    users = users.sort(function(a,b) { a=a.logins, b=b.logins; return a===b?0: a>b ? -1:1; });
-	    $.each(users, function(i, user){
-	        var li = $('<li>');
-	        var title = ""+ user.pnr + "\nLän: " + user.county + "\nInloggningar: " + user.logins ;
-	        var link = $('<a href="' + user.link + '" style="margin-right:20px" title="' + title + '">' + user.name + '</a>');
-	        li.append(link).appendTo(Navbar.navbarUserList);
-	    });
+	var sortUsers = function(userList, attr) {
+		userList = userList || _allUsers;
+		attr = attr || 'logins' ;
 
+		userList.sort(function(a,b) {
+			a=a[attr], b=b[attr]; 
+			return a===b ? 0 : a > b ? -1 : 1; 
+		});
 	};
 
 	var setAsLoaded = function() {
@@ -143,9 +192,9 @@ Coon.Navbar = (function(Navbar, Utils){
 		});
 	};
 
-	var addAfterLoginLitseners = function() {
+	var addAfterLoginListeners = function() {
 		Navbar.afterLoad(function(){
-			$('a', Navbar.navbarUserList).on('click', function(e){
+			$('a', $userList).on('click', function(e){
 				if(_afterLoginEventQueue.length < 1) { return; } 
 
 				e.preventDefault();
@@ -181,14 +230,8 @@ Coon.Navbar = (function(Navbar, Utils){
 			});
 		});
 
-
-
-		        /*, function(data) {
-		            var html = $($.parseHTML(data));
-		            var btnLink = $('#RespiteOffButton', html).prop('href');
-					var promise = $.get()
-				}	*/
 	};
+
 
 	// Return this object
 	return Navbar;

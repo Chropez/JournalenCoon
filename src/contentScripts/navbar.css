@@ -1,5 +1,8 @@
 
 /* Navbar */
+#coon-navbar {
+	font-family: RobotoDraft, Roboto, sans-serif;
+}
 
 #coon-navbar-toggler {
   height: 45px;
@@ -81,16 +84,31 @@
 	height: 100%;
 	overflow: auto;
 	padding-top: 10px;
+	margin: 0px;
 }
 
 #coon-navbar-user-list li {
-	padding:5px;
+	padding:5px 5px 5px 15px;
+	min-height: 40px;
 }
 
 #coon-navbar-user-list li a {
-	color: #0174BA;
+	color: #0FADAF;
 	text-decoration: none;
+	display: block;
+  	font-size: 16px;
+  	line-height: 14px;
 }
+
+#coon-navbar-user-list li a:hover {
+	text-decoration: underline;
+}
+
+
+#coon-navbar-user-list li .secondary-text {
+	color: #B2B2B2;
+}
+
 #coon-navbar-content-header {
 	border-bottom: 1px solid #ABA8A8;
 	height: 160px;
