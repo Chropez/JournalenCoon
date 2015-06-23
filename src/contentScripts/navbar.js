@@ -7,7 +7,7 @@ Coon.Navbar = (function(Navbar, Utils){
 	// ---------------------------------------
 
 	// Elements
-	var $navbarWrapper, $navbar, $userList, $hoverAreaTrigger ;
+	var $navbarWrapper, $navbar, $userList, $hoverAreaTrigger, $filterInput ;
 	
 	// State
 	var _hasLoaded = false , 
@@ -87,26 +87,51 @@ Coon.Navbar = (function(Navbar, Utils){
 	    	$navbar = $('#coon-navbar-content');
 	    	$userList = $('#coon-navbar-user-list');
 	    	$hoverAreaTrigger = $('#coon-navbar-hoverarea-trigger');
+	    	$filterInput = $('#coon-filter-users');
 		});
 	};
 
 	var addEventHandlers = function(){
 		// Trigger area shows the navbar on hover
-		debugger;
-		$hoverAreaTrigger.hover(function(){
+		$($hoverAreaTrigger).hover(function(){
 	        $navbarWrapper.addClass('active');
 	    }, function(){
 	        setTimeout(function(){
 	            if(!$navbar.is(':hover')){
 	                $navbarWrapper.removeClass('active');    
 	            }
-	        },100);
+	        },50);
 	    });
 
 	    $navbar.mouseleave(function(){
             $navbarWrapper.removeClass("active"); 
         });
+
+        $filterInput.on('keyup', function(){
+        	filterUserList()	;
+        } );
 	};
+
+	var filterUserList = function(){
+		var input = $filterInput.val().toLowerCase();
+
+		if(input==="") reRenderUsers();
+
+		var users = _allUsers.filter(function(user){
+			if(user.name.toLowerCase().indexOf(input)>-1 
+				|| user.pnr.toLowerCase().indexOf(input)>-1
+				|| user.county.toLowerCase().indexOf(input)>-1) {
+
+				return true;
+			}
+
+			return false;
+		});
+
+		reRenderUsers({users:users});
+
+	};
+
 	var createViewModel = function(viewModel){
 		var defaultViewModel = {
 		    	isAdmin  : _isAdmin , 
@@ -121,8 +146,8 @@ Coon.Navbar = (function(Navbar, Utils){
 	};
 
 	var reRenderUsers = function(viewModel){
-		var html = _template(viewModel);
-		$userList.html(html);
+		var $html = $(_template(viewModel));
+		$userList.html($('#coon-navbar-user-list', $html).html());
 	};
 
 	var loadData = function(){

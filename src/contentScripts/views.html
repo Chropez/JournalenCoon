@@ -4,35 +4,35 @@
 				<div id="coon-navbar-content-header-background"></div>
 			</a>
 			
+			<div id="coon-filter-users-wrapper">
+				<input type="text" id="coon-filter-users" placeholder="Skriv namn, pnr eller län">
+			</div>
+
 			<ul id="coon-navbar-user-list">
 				{{#if isAdmin}}
 					{{#each users}}
 						<li>
 							<a href="{{link}}">{{name}}</a>
-							{{!-- <span class="secondary-text auths">{{auths}}</span> --}}
+							{{!-- <div class="secondary-text auths">{{auths}}</div> --}}
 						</li>
 
 					{{else}}
-						No users found
+						<li>No users found</li>
 					{{/each}}
 				
 				{{else}}
 					{{#each users}}
 						<li>
 							<a href="{{link}}">{{name}}</a>
-							<span class="secondary-text pnr">{{pnr}}</span>
+							<div class="secondary-text pnr">{{pnr}}</div>
+							<div class="secondary-text Län">{{county}}</div>
 						</li>
 
 					{{else}}
-						No users found
+						<li>No users found</li>
 					{{/each}}
 				{{/if}}
 			</ul>
-			<br>
-			
-
-
-
 		</div>
 
 

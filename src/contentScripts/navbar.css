@@ -83,7 +83,6 @@
 	list-style: none;
 	height: 100%;
 	overflow: auto;
-	padding-top: 10px;
 	margin: 0px;
 }
 
@@ -96,8 +95,8 @@
 	color: #0FADAF;
 	text-decoration: none;
 	display: block;
-  	font-size: 16px;
-  	line-height: 14px;
+  	font-size: 15px;
+  	line-height: 20px;
 }
 
 #coon-navbar-user-list li a:hover {
@@ -107,6 +106,8 @@
 
 #coon-navbar-user-list li .secondary-text {
 	color: #B2B2B2;
+	font-size: 12px;
+	line-height: 16px;
 }
 
 #coon-navbar-content-header {
@@ -116,6 +117,7 @@
 	display: block;
 	box-sizing: border-box;
 }
+
 #coon-navbar-content-header-background {
 	background: #fff url('chrome-extension://__MSG_@@extension_id__/src/img/coon_background.jpg');
 	background-repeat: no-repeat;
@@ -123,4 +125,16 @@
 	background-size: cover;
 	height: 100%;
 	width: 100%;
+}
+
+#coon-filter-users-wrapper {
+	padding: 15px;
+	box-sizing: border-box;
+}
+
+#coon-filter-users {
+	width: 100%;
+	box-sizing: border-box;
+	min-height: 30px;
+	margin: 0;
 }
