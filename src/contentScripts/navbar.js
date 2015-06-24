@@ -227,6 +227,11 @@ Coon.Navbar = (function(Navbar, Utils){
 				linkUrl = $a.prop('href');
 
 	        	//showLoadingLink($a);
+	        	
+			$("<div/>")
+				.attr("id", "coon-loading-wrapper")
+				.text("Laddar...")
+				.appendTo($("body"));
 
 		        var login = $.get(linkUrl);
 		        var cbPromises = [];
