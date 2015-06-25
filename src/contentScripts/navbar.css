@@ -84,6 +84,7 @@
 	height: 100%;
 	overflow: auto;
 	margin: 0px;
+	-webkit-padding-start: 0px;
 }
 
 #coon-navbar-user-list li {

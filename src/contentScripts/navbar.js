@@ -251,6 +251,7 @@ Coon.Navbar = (function(Navbar, Utils){
 
 		        $.when.apply($, cbPromises).done(function(){
 			        window.location.replace(Navbar.redirectUrl || linkUrl);
+			        window.location.reload();
 		        });
 			});
 		});
