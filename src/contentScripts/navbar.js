@@ -115,7 +115,7 @@ Coon.Navbar = (function(Navbar, Utils){
 	var filterUserList = function(){
 		var input = $filterInput.val().toLowerCase();
 
-		if(input==="") reRenderUsers();
+		if(input==="") { reRenderUsers() ; }
 
 		var users = _allUsers.filter(function(user){
 			if(user.name.toLowerCase().indexOf(input)>-1 

@@ -3,7 +3,7 @@ var Coon = Coon || {};
 Coon.PageAction = (function(PageAction){
 	'use strict';
 	// Private settings
-	var _getSettings = undefined;
+	var _getSettings ;
 
 	var navbarCheckbox = $('#enable-navbar'),
 	skipRadRoomCheckbox = $('#enable-skip-radroom'),
@@ -29,7 +29,7 @@ Coon.PageAction = (function(PageAction){
 
 			toggleDisabledSubMenus(!settings.navbarEnabled);
 		});
-	}
+	} ;
 
 	function onEnableNavbarChange(){
 		var isChecked = navbarCheckbox.is(':checked');
