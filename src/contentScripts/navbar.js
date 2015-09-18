@@ -42,7 +42,6 @@ Coon.Navbar = (function(Navbar, Utils){
 
 	// Inits 
 	Navbar.init = function () {
-		//createElements();
 		renderNavbar()
 			.then(addEventHandlers)
 			.then(loadData)
@@ -98,13 +97,13 @@ Coon.Navbar = (function(Navbar, Utils){
 	    }, function(){
 	        setTimeout(function(){
 	            if(!$navbar.is(':hover')){
-	                $navbarWrapper.removeClass('active');    
+	                $navbarWrapper.removeClass('active'); 
 	            }
 	        },50);
 	    });
 
 	    $navbar.mouseleave(function(){
-            $navbarWrapper.removeClass("active"); 
+            $navbarWrapper.removeClass("active");
         });
 
         $filterInput.on('keyup', function(){
@@ -118,9 +117,9 @@ Coon.Navbar = (function(Navbar, Utils){
 		if(input==="") { reRenderUsers() ; }
 
 		var users = _allUsers.filter(function(user){
-			if(user.name.toLowerCase().indexOf(input)>-1 
-				|| user.pnr.toLowerCase().indexOf(input)>-1
-				|| user.county.toLowerCase().indexOf(input)>-1) {
+			if(user.name.toLowerCase().indexOf(input)>-1 || 
+				user.pnr.toLowerCase().indexOf(input)>-1 || 
+				user.county.toLowerCase().indexOf(input)>-1) {
 
 				return true;
 			}
@@ -139,8 +138,9 @@ Coon.Navbar = (function(Navbar, Utils){
 		    	users 	 : _allUsers
 		    };
 
-		if(viewModel) 
+		if(viewModel) {
 			return $.extend({}, defaultViewModel, viewModel);
+		}
 
 		return defaultViewModel;
 	};
@@ -205,7 +205,8 @@ Coon.Navbar = (function(Navbar, Utils){
 		attr = attr || 'logins' ;
 
 		userList.sort(function(a,b) {
-			a=a[attr], b=b[attr]; 
+			a=a[attr];
+			b=b[attr]; 
 			return a===b ? 0 : a > b ? -1 : 1; 
 		});
 	};
@@ -226,13 +227,8 @@ Coon.Navbar = (function(Navbar, Utils){
 				var $a = $(this),
 				linkUrl = $a.prop('href');
 
-	        	//showLoadingLink($a);
-	        	
-			$("<div/>")
-				.attr("id", "coon-loading-wrapper")
-				.text("Laddar...")
-				.appendTo($("body"));
-
+	        	showLoadingLink($a);
+		        	
 		        var login = $.get(linkUrl);
 		        var cbPromises = [];
 
@@ -252,15 +248,32 @@ Coon.Navbar = (function(Navbar, Utils){
 		        		}
     				});
 		        });
-
-
 		        $.when.apply($, cbPromises).done(function(){
-			        window.location.replace(Navbar.redirectUrl || linkUrl);
-			        window.location.reload();
+		        	var location = Navbar.redirectUrl || linkUrl;
+	        		window.location.replace(location);
+	        		if(window.location.hash!=="") {
+	        			window.location.reload();
+	        		}
 		        });
 			});
 		});
 
+	};
+
+	var showLoadingLink = function($userLink){
+		var svgUrl = chrome.extension.getURL('src/img/ball.svg');
+		var $loadingIcon = $(
+			'<div id="coon-loading-wrapper" style="display:none;">' +
+				'<div class="coon-shadow"></div>' +
+				'<div>' +
+					'<div class="coon-loading"/>' +
+					'<img src="' + svgUrl + '"/>' +
+				'</div>'	+
+				'<div id="coon-loading-text">Loading</div>' +
+			'</div>'
+		);
+		$navbar.append($loadingIcon);
+		$loadingIcon.fadeIn('fast');
 	};
 
 

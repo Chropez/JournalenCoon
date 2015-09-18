@@ -2,7 +2,7 @@ var Coon = Coon || {};
 Coon.Utils = (function(Utils, Navbar){
     'use strict';
 
-    var _baseUrl = undefined;
+    var _baseUrl ;
 
     var init = function(){
         calculateBaseUrl();

@@ -9,7 +9,7 @@
   width: 45px;
   padding: 5px;
   position: fixed;
-  z-index: 100;
+  z-index: 10100;
   opacity: 0.8;
 }
 
@@ -28,7 +28,7 @@
 }
 #coon-navbar-hoverarea-trigger  {
 	position: fixed;
-	z-index: 100;
+	z-index: 10100;
 	top: 0;
 	bottom: 0;
 	left:0;
@@ -52,7 +52,7 @@
 	bottom: 0;
 	left: -230px;
 	width: 220px;
-	z-index: 120;
+	z-index: 10120;
 	background-color: white;
 	box-shadow: rgba(0, 0, 0, 0.2) 3px 0px 10px;
 
@@ -68,7 +68,7 @@
 	bottom: 0;
 	left:0;
 	right:0;
-	z-index: 90;
+	z-index: 10090;
 	opacity:0;
 	visibility: hidden;
 	transition: all 0.4s linear 0.2s;
@@ -141,12 +141,50 @@
 }
 
 #coon-loading-wrapper {
+
 	position: absolute;
-	right: 80px;
-	top: 5px;
-	background-color: rgb(255, 192, 203);
-	z-index: 1000;
-	padding: 5px 10px;
-	border-radius: 10px;
-	margin: 0px;
+	left: 220px;
+	top: 0;
+	box-shadow: rgba(0, 0, 0, 0.2) 3px 0px 10px;  
+    width: 175px;
+    height: 105px;
+    background-color: rgb(222,222,222);
+    opacity: 0.85;
+    /* border-radius: 10px; */
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    z-index: 10110;
+}
+
+#coon-loading-wrapper .coon-loading {
+	background: url('chrome-extension://__MSG_@@extension_id__/src/img/coon_loading.png');
+	background-repeat: no-repeat;
+	background-size: 96px 60px; 
+	width: 96px;
+	height: 60px;
+	margin: 0 auto;    
+	float: right;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+#coon-loading-wrapper img {
+	float: left;
+    margin-top: 30px;
+}
+
+#coon-loading-text {
+    margin-left: 68px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #292928;
+}
+#coon-loading-wrapper .coon-shadow {
+    position: absolute;
+    height: 105px;
+    width: 2px;
+    background-color: rgba(255, 0, 0, 0);
+    left: -2px;
+    z-index: -1;
+    box-shadow: rgba(0, 0, 0, 0.2) 3px 0px 10px;
 }

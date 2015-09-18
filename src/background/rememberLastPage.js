@@ -5,7 +5,7 @@
 	var _urlsToIgnore = [
 		'',
 		'LoggedOut/TimedOut',
-		'Login/Respite'
+		'Login/Respite',
 	];
 
 	chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {

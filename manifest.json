@@ -1,6 +1,6 @@
 {
   "name": "Journalen Coon",
-  "version": "0.7.1",
+  "version": "0.7.3",
   "manifest_version": 2,
   "description": "The Coon takes over Journalen!",
   "homepage_url": "http://en.wikipedia.org/wiki/The_Coon",
@@ -41,7 +41,9 @@
         "http://172.17.254.12/*",
         "http://172.17.254.12:8080/*",
         "http://82.136.180.214/*",
-        "http://82.136.180.214:8080/*"
+        "http://82.136.180.214:44358/*",
+        "https://82.136.180.104/*",
+        "https://82.136.180.104:44358/*"
       ],
       
       "css": [
