@@ -9,7 +9,7 @@
   width: 45px;
   padding: 5px;
   position: fixed;
-  z-index: 10100;
+  z-index: 101000;
   opacity: 0.8;
 }
 
@@ -19,7 +19,7 @@
 
 #coon-navbar-hoverarea {
 	position: fixed;
-	z-index: 100;
+	z-index: 10000;
 	top: 0;
 	bottom: 0;
 	left:0;
@@ -28,7 +28,7 @@
 }
 #coon-navbar-hoverarea-trigger  {
 	position: fixed;
-	z-index: 10100;
+	z-index: 101000;
 	top: 0;
 	bottom: 0;
 	left:0;
@@ -52,7 +52,7 @@
 	bottom: 0;
 	left: -230px;
 	width: 220px;
-	z-index: 10120;
+	z-index: 101200;
 	background-color: white;
 	box-shadow: rgba(0, 0, 0, 0.2) 3px 0px 10px;
 
@@ -68,7 +68,7 @@
 	bottom: 0;
 	left:0;
 	right:0;
-	z-index: 10090;
+	z-index: 100900;
 	opacity:0;
 	visibility: hidden;
 	transition: all 0.4s linear 0.2s;
@@ -153,7 +153,7 @@
     /* border-radius: 10px; */
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    z-index: 10110;
+    z-index: 101100;
 }
 
 #coon-loading-wrapper .coon-loading {
