@@ -91,6 +91,24 @@ Coon.Navbar = (function(Navbar, Utils){
 	};
 
 	var addEventHandlers = function(){
+		initHoverArea();
+
+        $filterInput.on('keyup', function(){
+        	filterUserList()	;
+        } );
+	};
+
+	var initHoverArea = function(){
+		$(document).on('mousemove.showtrigger', function(e){
+			if(!$hoverAreaTrigger.hasClass('active')){
+				if(e.pageX < 100) {
+					$hoverAreaTrigger.addClass('visible');
+				}else{
+					$hoverAreaTrigger.removeClass('visible');
+				}
+			}
+		});
+
 		// Trigger area shows the navbar on hover
 		$($hoverAreaTrigger).hover(function(){
 	        $navbarWrapper.addClass('active');
@@ -105,11 +123,7 @@ Coon.Navbar = (function(Navbar, Utils){
 	    $navbar.mouseleave(function(){
             $navbarWrapper.removeClass("active");
         });
-
-        $filterInput.on('keyup', function(){
-        	filterUserList()	;
-        } );
-	};
+	}
 
 	var filterUserList = function(){
 		var input = $filterInput.val().toLowerCase();

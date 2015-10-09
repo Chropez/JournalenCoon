@@ -17,15 +17,6 @@
 	width: 100%;
 }
 
-#coon-navbar-hoverarea {
-	position: fixed;
-	z-index: 10000;
-	top: 0;
-	bottom: 0;
-	left:0;
-	width: 100px;	
-	overflow: auto;
-}
 #coon-navbar-hoverarea-trigger  {
 	position: fixed;
 	z-index: 101000;
@@ -36,7 +27,7 @@
 	overflow: auto;
 }
 
-#coon-navbar-hoverarea:hover #coon-navbar-hoverarea-trigger {
+#coon-navbar-hoverarea-trigger.visible {
 	background-color: gray;
 	opacity: 0.2;
 } 
