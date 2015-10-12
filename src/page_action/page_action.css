@@ -2,12 +2,12 @@
 #mainPopup {
 	padding: 20px;
 	height: 200px;
-	width: 400px;
+	width: 430px;
 }
 
 #mainPopup h3{
 	text-align: center;
-	margin-bottom: 0px;
+	margin-bottom: 10px;
 	margin-top: 0px;
 }
 

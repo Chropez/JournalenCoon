@@ -16,6 +16,11 @@
 		if( settings.keepMeLoggedInEnabled ){ 
 			Coon.KeepMeLoggedIn.init();
 		}
+
+
+		if( settings.journalCommentAutoEnabled ){ 
+			Coon.JournalComments.init();
+		}
 	
 	});
 })();

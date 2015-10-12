@@ -7,6 +7,7 @@ Coon.Settings = (function(){
 		navbarEnabled : true ,
 		skipRadRoomEnabled : false,
 		rememberLastPageEnabled : true,
-		keepMeLoggedInEnabled : false
+		keepMeLoggedInEnabled : false,
+		journalCommentAutoEnabled : true
 	} ;
 })();

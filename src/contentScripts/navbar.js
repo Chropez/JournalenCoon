@@ -225,6 +225,7 @@ Coon.Navbar = (function(Navbar, Utils){
 		});
 	};
 
+	// sets the navbar as loaded and run afterload event queues.
 	var setAsLoaded = function() {
 		_hasLoaded = true;
 		_afterLoadEventQueue.forEach(function(fn){
@@ -250,21 +251,42 @@ Coon.Navbar = (function(Navbar, Utils){
 		        	var cbDeferred = $.Deferred();
 		        	cbPromises.push(cbDeferred);
 
+	        		// Queues event after login
         			login.then(function(data){
+        				// retval = the returnvalue of the eventqueue function 
+        				var retVal = undefined;
+
         				if(!Navbar.redirectUrl){
-	        				fn.apply(this, [data]);
-	        				cbDeferred.resolve();
+	        				retVal = fn.apply(this, [data]);
         				} else {
 	        				$.get(Navbar.redirectUrl).then(function(data){
-	        					fn.apply(this, [data]);		
-		        				cbDeferred.resolve();
+	        					retVal = fn.apply(this, [data]);
         					});
 		        		}
+
+	        			// If the returnvalue is a promise, 
+	        			// wait for it to be resolved before resolving the
+	        			// event queue function
+		        		if(retVal !== undefined && retVal.promise){
+		        			retVal.done(function(){
+		        				cbDeferred.resolve();		        				
+		        			});
+		        		}else{
+			        		// resolves the promise
+	        				cbDeferred.resolve();		        			
+		        		}
+
     				});
 		        });
 		        $.when.apply($, cbPromises).done(function(){
+		        	// all afterLoginEvents have been loaded, reset the array
+		        	_afterLoginEventQueue = [];
+
+		        	// redirect to the redirectUrl
 		        	var location = Navbar.redirectUrl || linkUrl;
 	        		window.location.replace(location);
+
+	        		// If there is a hash in the url then reload the page
 	        		if(window.location.hash!=="") {
 	        			window.location.reload();
 	        		}
@@ -274,6 +296,8 @@ Coon.Navbar = (function(Navbar, Utils){
 
 	};
 
+
+	// Shows loading animation
 	var showLoadingLink = function($userLink){
 		var svgUrl = chrome.extension.getURL('src/img/ball.svg');
 		var $loadingIcon = $(

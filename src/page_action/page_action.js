@@ -8,7 +8,8 @@ Coon.PageAction = (function(PageAction){
 	var navbarCheckbox = $('#enable-navbar'),
 	skipRadRoomCheckbox = $('#enable-skip-radroom'),
 	rememberLastPageCheckbox = $('#enable-remember-last-page'),
-	keepMeLoggedInCheckbox = $('#enable-keep-me-logged-in');
+	keepMeLoggedInCheckbox = $('#enable-keep-me-logged-in'),
+	autoEnableJournalNotesCheckbox = $('#enable-auto-enable-journal-notes');
 
 
 	// Litseners
@@ -16,6 +17,7 @@ Coon.PageAction = (function(PageAction){
 	skipRadRoomCheckbox.on('change', onEnableSkipRadRoomChange);
 	rememberLastPageCheckbox.on('change', onEnableRememberLastPageChange);
 	keepMeLoggedInCheckbox.on('change', onEnableKeepMeLoggedInChange);
+	autoEnableJournalNotesCheckbox.on('change', onAutoEnableJournalNotesChange);
 
 	//Functions
 	PageAction.init = function(getSettings) {
@@ -26,7 +28,7 @@ Coon.PageAction = (function(PageAction){
 			skipRadRoomCheckbox.prop('checked', settings.skipRadRoomEnabled);
 			rememberLastPageCheckbox.prop('checked', settings.rememberLastPageEnabled);
 			keepMeLoggedInCheckbox.prop('checked', settings.keepMeLoggedInEnabled);
-
+			autoEnableJournalNotesCheckbox.prop('checked', settings.journalCommentAutoEnabled)
 			toggleDisabledSubMenus(!settings.navbarEnabled);
 		});
 	} ;
@@ -68,6 +70,16 @@ Coon.PageAction = (function(PageAction){
 		var isChecked = keepMeLoggedInCheckbox.is(':checked');
 			_getSettings(function(settings){
 				settings.keepMeLoggedInEnabled = isChecked;
+				chrome.storage.sync.set({settings : settings}, function(){
+					showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
+			});
+		});	
+	}
+
+	function onAutoEnableJournalNotesChange(){
+		var isChecked = autoEnableJournalNotesCheckbox.is(':checked');
+			_getSettings(function(settings){
+				settings.journalCommentAutoEnabled = isChecked;
 				chrome.storage.sync.set({settings : settings}, function(){
 					showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
 			});

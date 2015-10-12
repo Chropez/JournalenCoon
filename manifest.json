@@ -1,6 +1,6 @@
 {
   "name": "Journalen Coon",
-  "version": "0.7.4",
+  "version": "0.8.0",
   "manifest_version": 2,
   "description": "The Coon takes over Journalen!",
   "homepage_url": "http://en.wikipedia.org/wiki/The_Coon",
@@ -58,6 +58,7 @@
         "src/contentScripts/skipRadRoom.js",
         "src/contentScripts/rememberLastPage.js",
         "src/contentScripts/keepMeLoggedIn.js",
+        "src/contentScripts/journalComments.js",
         "src/contentScripts/main.js"
       ]
     }
