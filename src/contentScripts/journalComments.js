@@ -16,6 +16,10 @@ Coon.JournalComments = (function(JournalComments, Navbar, Utils){
 						.then(postForm)
 						.then(function(){
 							promise.resolve();
+						})
+						// In case an error occurs
+						.fail(function(){
+							promise.resolve();
 						}) ;
 
 		return promise;
