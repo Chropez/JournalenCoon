@@ -55,7 +55,6 @@
         "bower_components/handlebars/handlebars.min.js",
         "src/contentScripts/utils.js",
         "src/contentScripts/navbar.js",
-        "src/contentScripts/skipRadRoom.js",
         "src/contentScripts/rememberLastPage.js",
         "src/contentScripts/keepMeLoggedIn.js",
         "src/contentScripts/journalComments.js",

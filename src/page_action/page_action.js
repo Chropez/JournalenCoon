@@ -6,7 +6,6 @@ Coon.PageAction = (function(PageAction){
 	var _getSettings ;
 
 	var navbarCheckbox = $('#enable-navbar'),
-	skipRadRoomCheckbox = $('#enable-skip-radroom'),
 	rememberLastPageCheckbox = $('#enable-remember-last-page'),
 	keepMeLoggedInCheckbox = $('#enable-keep-me-logged-in'),
 	autoEnableJournalNotesCheckbox = $('#enable-auto-enable-journal-notes');
@@ -14,7 +13,6 @@ Coon.PageAction = (function(PageAction){
 
 	// Litseners
 	navbarCheckbox.on('change', onEnableNavbarChange);
-	skipRadRoomCheckbox.on('change', onEnableSkipRadRoomChange);
 	rememberLastPageCheckbox.on('change', onEnableRememberLastPageChange);
 	keepMeLoggedInCheckbox.on('change', onEnableKeepMeLoggedInChange);
 	autoEnableJournalNotesCheckbox.on('change', onAutoEnableJournalNotesChange);
@@ -25,7 +23,6 @@ Coon.PageAction = (function(PageAction){
 
 		_getSettings(function(settings) {
 			navbarCheckbox.prop('checked', settings.navbarEnabled);
-			skipRadRoomCheckbox.prop('checked', settings.skipRadRoomEnabled);
 			rememberLastPageCheckbox.prop('checked', settings.rememberLastPageEnabled);
 			keepMeLoggedInCheckbox.prop('checked', settings.keepMeLoggedInEnabled);
 			autoEnableJournalNotesCheckbox.prop('checked', settings.journalCommentAutoEnabled)
@@ -44,16 +41,6 @@ Coon.PageAction = (function(PageAction){
 		});
 
 		toggleDisabledSubMenus(!isChecked);
-	}
-
-	function onEnableSkipRadRoomChange(){
-		var isChecked = skipRadRoomCheckbox.is(':checked');
-		_getSettings(function(settings){
-			settings.skipRadRoomEnabled = isChecked;
-			chrome.storage.sync.set({settings : settings}, function(a){
-				showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
-			});
-		});
 	}
 
 	function onEnableRememberLastPageChange(){
@@ -87,7 +74,7 @@ Coon.PageAction = (function(PageAction){
 	}
 
 	function toggleDisabledSubMenus(showAsdisabled){
-		$.each([skipRadRoomCheckbox, rememberLastPageCheckbox], function(i, checkbox){
+		$.each([rememberLastPageCheckbox], function(i, checkbox){
 			checkbox.prop('disabled', showAsdisabled);
 		});
 	}
