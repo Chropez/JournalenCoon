@@ -235,7 +235,7 @@ Coon.Navbar = (function(Navbar, Utils){
 
 	var addAfterLoginListeners = function() {
 		Navbar.afterLoad(function(){
-			$('a', $userList).on('click', function(e){
+			$(document).on('click', '#coon-navbar-user-list a', function(e){
 				if(_afterLoginEventQueue.length < 1) { return; } 
 
 				e.preventDefault();
