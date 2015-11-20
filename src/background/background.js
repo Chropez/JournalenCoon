@@ -16,9 +16,7 @@ Coon.Background = (function(){
     function init() {
         // Intecepts all messages
         chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {      
-            // Show coon on adressbar
-            chrome.pageAction.show(sender.tab.id); 
-
+            
             var action = request.action ;
             if(!action) { return false; }
 

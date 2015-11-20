@@ -1,6 +1,7 @@
 var Coon = Coon || {};
 
-Coon.PageAction = (function(PageAction){
+Coon.Settings = (function(Settings){
+
 	'use strict';
 	// Private settings
 	var _getSettings ;
@@ -18,7 +19,7 @@ Coon.PageAction = (function(PageAction){
 	autoEnableJournalNotesCheckbox.on('change', onAutoEnableJournalNotesChange);
 
 	//Functions
-	PageAction.init = function(getSettings) {
+	Settings.init = function(getSettings) {
 		_getSettings = getSettings;
 
 		_getSettings(function(settings) {
@@ -83,10 +84,5 @@ Coon.PageAction = (function(PageAction){
 		$('#message').html(message).show();
 	}
 
-	return PageAction;
-
-})(Coon.PageAction || {});
-
-chrome.runtime.getBackgroundPage(function(bgPage){
-	Coon.PageAction.init(bgPage.Coon.Background.getSettings);
-});
+	return Settings;
+})(Coon.Settings || {});
