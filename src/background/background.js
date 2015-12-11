@@ -10,13 +10,14 @@ Coon.Background = (function(){
 
     return {
         init: init ,
-        getSettings : getSettings
+        getSettings : getSettings,
+        getEnvironments: getEnvironments
     };
 
     function init() {
         // Intecepts all messages
-        chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {      
-            
+        chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+
             var action = request.action ;
             if(!action) { return false; }
 
@@ -35,6 +36,30 @@ Coon.Background = (function(){
             var settings = $.extend(settings, Coon.Settings, res.settings);
             sendResponse( settings );
         });
+    }
+
+    function getEnvironments(sendResponse) {
+      $.getJSON('data/environments.json').then(function(defaultEnvs){
+        chrome.storage.sync.get({ environments: defaultEnvs }, function (res) {
+          sendResponse(mergeEnvironments(defaultEnvs, res.environments));
+        });
+      });
+
+    }
+
+    function mergeEnvironments(defaultEnvs, userEnvs) {
+      var envs = [];
+      defaultEnvs.forEach(function(env){
+        // find userEnv with same ID
+        var userEnv = $.grep(userEnvs, function(e) { return e.id === env.id ; });
+        if(userEnv.length > 0) {
+          var mergedEnv = $.extend(mergedEnv, env, userEnv[0]);
+          envs.push(mergedEnv);
+        }else{
+          envs.push(env);
+        }
+      });
+      return envs;
     }
 
 })();
@@ -60,7 +85,7 @@ chrome.runtime.onInstalled.addListener(function(details){
                 });
             });
         }
-        
+
         console.log("Updated from " + details.previousVersion + " to " + thisVersion + "!");
     }
 });*/

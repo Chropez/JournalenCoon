@@ -1,5 +1,6 @@
 [
   {
+    "id" : 1,
     "name": "Lokal utvecklingsmiljö",
     "user" : [
       { "url" : "http://local.jpn/" }
@@ -9,6 +10,7 @@
     ]
   },
   {
+    "id" : 2,
     "name": "Testmiljö",
     "user" : [
       { "url" : "http://test.jpn.se" },
@@ -19,6 +21,7 @@
     ]
   },
   {
+    "id" : 3,
     "name": "Demomiljö",
     "user" : [
       { "url" : "https://demo.jpn.se" },
@@ -29,6 +32,7 @@
     ]
   },
   {
+    "id" : 4,
     "name": "Extern Test (QA)",
     "user" : [
       { "url" : "http://82.136.180.244/JpnExternTest/WebClient" }

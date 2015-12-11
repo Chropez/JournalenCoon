@@ -8,32 +8,31 @@
     <div id="coon-settings">
       <div class="checkbox">
         <label>
-          <input type="checkbox" id="enable-navbar"> Coon navbar
+
+          {{input type="checkbox" checked=model.navbarEnabled}} Coon navbar
         </label>
 
         <div class="sub-settings">
           <label>
-            <input type="checkbox" id="enable-remember-last-page"> Remember last page you were on
+            {{input type="checkbox" checked=model.rememberLastPageEnabled}} Remember last page you were on
           </label>
         </div>
 
         <div>
           <label>
-            <input type="checkbox" id="enable-keep-me-logged-in"> Keep me logged in
+            {{input type="checkbox" checked=model.keepMeLoggedInEnabled}} Keep me logged in
           </label>
         </div>
 
         <div>
           <label>
-            <input type="checkbox" id="enable-auto-enable-journal-notes"> Enable Journal notes automatically
+            {{input type="checkbox" checked=model.journalCommentAutoEnabled}} Enable Journal notes automatically
           </label>
         </div>
       </div>
 
       <div style="height: 70px">
-        <div class="alert alert-warning" id="message" role="alert">
-
-        </div>
+        <div class="alert alert-warning" id="message" role="alert"></div>
       </div>
     </div>
   </section>
