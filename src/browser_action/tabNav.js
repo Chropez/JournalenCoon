@@ -15,8 +15,8 @@ Coon.TabNav = (function(TabNav){
 
 		_settings.navbar.find('a').on('click', function(e){
 			e.preventDefault();
-			alert('clicked');
+
 		});
-	}
+	};
 	return TabNav;
 })(Coon.TabNav || {});

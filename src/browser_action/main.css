@@ -1,7 +1,13 @@
-#container {
-	display: inline-flex;
+#ember-app > div{
 	height: 600px;
 	width: 500px;
+	overflow: auto;
+}
+
+#container {
+	display: inline-flex;
+	height: 100%;
+	width: 100%;
 }
 
 /* Sidebar */
@@ -23,11 +29,16 @@
 }
 
 #sidebar li:hover, #sidebar li.active {
-	background-color: #686464;
+	background-color: #4C4C4C;
+}
+
+#sidebar li.active a{
+	position: relative;
+	left: -2px;
 }
 
 #sidebar li.active {
-	border-left: 3px solid #3EA9FF;
+	border-left: 4px solid #3EA9FF;
 }
 
 #sidebar ul {
@@ -38,6 +49,7 @@
 /* Main Content */
 #main-content {
 	padding: 6px 20px;
+	width: 100%;
 }
 
 #main-content .header{
@@ -49,7 +61,7 @@
 	margin-top: 0px;
 }
 
-#main-content .header .title .icon{ 
+#main-content .header .title .icon{
 	font-size: 25px;
 }
 
@@ -86,6 +98,3 @@
 #environments-content li{
 	margin:10px 0;
 }
-
-
-

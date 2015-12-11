@@ -1,7 +1,6 @@
 var Coon = Coon || {};
 
 Coon.Settings = (function(Settings){
-
 	'use strict';
 	// Private settings
 	var _getSettings ;
@@ -26,7 +25,7 @@ Coon.Settings = (function(Settings){
 			navbarCheckbox.prop('checked', settings.navbarEnabled);
 			rememberLastPageCheckbox.prop('checked', settings.rememberLastPageEnabled);
 			keepMeLoggedInCheckbox.prop('checked', settings.keepMeLoggedInEnabled);
-			autoEnableJournalNotesCheckbox.prop('checked', settings.journalCommentAutoEnabled)
+			autoEnableJournalNotesCheckbox.prop('checked', settings.journalCommentAutoEnabled);
 			toggleDisabledSubMenus(!settings.navbarEnabled);
 		});
 	} ;
@@ -51,7 +50,7 @@ Coon.Settings = (function(Settings){
 				chrome.storage.sync.set({settings : settings}, function(){
 					showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
 			});
-		});	
+		});
 	}
 
 	function onEnableKeepMeLoggedInChange(){
@@ -61,7 +60,7 @@ Coon.Settings = (function(Settings){
 				chrome.storage.sync.set({settings : settings}, function(){
 					showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
 			});
-		});	
+		});
 	}
 
 	function onAutoEnableJournalNotesChange(){
@@ -71,7 +70,7 @@ Coon.Settings = (function(Settings){
 				chrome.storage.sync.set({settings : settings}, function(){
 					showHtmlMessage('<b>The Coon</b> will make your changes the next time you reload the page!');
 			});
-		});	
+		});
 	}
 
 	function toggleDisabledSubMenus(showAsdisabled){

@@ -5,12 +5,12 @@ Coon.BrowserAction = (function(BrowserAction, Settings, TabNav){
 	BrowserAction.init = function(getSettings) {
 		// Inits tabs
 		TabNav.init({
-			navbar : $('#sidebar'), 
+			navbar : $('#sidebar'),
 			target : $('#main-content')
 		});
 
 		Settings.init(getSettings);
-	}
+	};
 	return BrowserAction;
 })(Coon.BrowserAction || {}, Coon.Settings, Coon.TabNav);
 

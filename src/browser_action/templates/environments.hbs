@@ -1,0 +1,25 @@
+<article id="environments-content">
+  <header class="header">
+    <h3 class="title">
+      <span class="glyphicon glyphicon-globe icon"></span> Environments
+    </h3>
+  </header>
+  <section class="content">
+    <ul class="list-unstyled">
+      {{#each model as |environment|}}
+      <li>
+        <h5 class="environment-title">{{environment.name}}</h5>
+
+        {{! Todo: loop over other the list of users}}
+        <a href="{{environment.user.0.url}}" target="_blank">User</a> |
+        <a href="{{environment.admin.0.url}}" target="_blank">Admin</a>
+      </li>
+      {{/each}}
+      <!-- <li>
+        <h5 class="environment-title">Testmiljö</h5>
+        <a href="http://test.jpn.se" target="_blank">User</a> |
+        <a href="http://test.admin.jpn.se" target="_blank">Admin</a>
+      </li> -->
+    </ul>
+  </section>
+</article>
