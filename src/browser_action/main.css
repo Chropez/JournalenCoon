@@ -1,7 +1,11 @@
-#ember-app > div{
+#ember-app {
 	height: 600px;
 	width: 500px;
+}
+#ember-app > div{
 	overflow: auto;
+	height: 100%;
+	widows: 100%;
 }
 
 #container {
@@ -50,6 +54,13 @@
 #main-content {
 	padding: 6px 20px;
 	width: 100%;
+	overflow: auto;
+
+	background: url(../img/the_coon_jumbo.jpg);
+	/*background-size: 399px 290px;*/
+	background-size: 250px 180px;
+  background-repeat: no-repeat;
+	background-position: right bottom;
 }
 
 #main-content .header{
@@ -76,9 +87,6 @@
 }
 
 /* Message */
-#message {
-	display: none;
-}
 
 /* Settings */
 #coon-settings label {
