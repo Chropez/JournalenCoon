@@ -1,0 +1,48 @@
+<article id="settings-content">
+  <header class="header">
+    <h3 class="title">
+      <span class="glyphicon glyphicon-cog icon"></span> Settings
+    </h3>
+  </header>
+  <section class="content">
+    <div id="coon-settings">
+      <div class="checkbox">
+        <label>
+           <!-- <input type="checkbox" checked={{if model.navbarEnabled "checked"  ""}} onchange={{action "saveSettings"}}> -->
+           {{input type="checkbox" checked=model.navbarEnabled change=(action "saveSettings")}}
+           Coon navbar
+        </label>
+
+        <div class="sub-settings">
+          <label>
+            {{input type="checkbox" checked=model.rememberLastPageEnabled change=(action "saveSettings")}}
+            Remember last page you were on
+          </label>
+        </div>
+
+        <div>
+          <label>
+            {{input type="checkbox" checked=model.keepMeLoggedInEnabled change=(action "saveSettings")}}
+            Keep me logged in
+          </label>
+        </div>
+
+        <div>
+          <label>
+            {{input type="checkbox" checked=model.journalCommentAutoEnabled change=(action "saveSettings")}}
+            Enable Journal notes automatically
+          </label>
+        </div>
+      </div>
+      {{#if showErrorMessage}}
+      <div style="height: 70px">
+        <div class="alert alert-warning" id="message" role="alert">
+          <h4>Settings changed!</h4>
+          The changes will be made next time you load the page!
+        </div>
+      </div>
+      {{/if}}
+
+    </div>
+  </section>
+</article>

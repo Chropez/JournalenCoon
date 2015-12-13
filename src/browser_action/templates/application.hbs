@@ -1,0 +1,16 @@
+
+<div id="container">
+  <div id="sidebar">
+    <ul>
+      {{#link-to "environments" tagName="li"}}
+        <a href="#" class="glyphicon glyphicon-globe"></a>
+      {{/link-to}}
+      {{#link-to "settings" tagName="li"}}
+        <a href="#" class="glyphicon glyphicon-cog"></a>
+      {{/link-to}}
+    </ul>
+  </div>
+  <div id="main-content">
+    {{outlet}}
+  </div>
+</div>

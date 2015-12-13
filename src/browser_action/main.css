@@ -1,0 +1,108 @@
+#ember-app {
+	height: 600px;
+	width: 500px;
+}
+#ember-app > div{
+	overflow: auto;
+	height: 100%;
+	widows: 100%;
+}
+
+#container {
+	display: inline-flex;
+	height: 100%;
+	width: 100%;
+}
+
+/* Sidebar */
+#sidebar {
+	background-color: #3D3A3A;
+	width: 60px;
+	padding: 0px;
+}
+
+#sidebar a{
+	color: white;
+	text-decoration: none;
+}
+
+#sidebar li{
+	text-align: center;
+	font-size: 30px;
+	height: 50px;
+}
+
+#sidebar li:hover, #sidebar li.active {
+	background-color: #4C4C4C;
+}
+
+#sidebar li.active a{
+	position: relative;
+	left: -2px;
+}
+
+#sidebar li.active {
+	border-left: 4px solid #3EA9FF;
+}
+
+#sidebar ul {
+	list-style: none;
+	padding: 0;
+}
+
+/* Main Content */
+#main-content {
+	padding: 6px 20px;
+	width: 100%;
+	overflow: auto;
+
+	background: url(../img/the_coon_jumbo.jpg);
+	/*background-size: 399px 290px;*/
+	background-size: 250px 180px;
+  background-repeat: no-repeat;
+	background-position: right bottom;
+}
+
+#main-content .header{
+	margin-bottom: 20px;
+	border-bottom: 1px solid #C9C9C9;
+}
+
+#main-content .header .title{
+	margin-top: 0px;
+}
+
+#main-content .header .title .icon{
+	font-size: 25px;
+}
+
+#main-content .content {
+	padding: 0 4px;
+}
+
+/* General */
+.coon-img {
+	margin-top: 20px;
+	width: 100%;
+}
+
+/* Message */
+
+/* Settings */
+#coon-settings label {
+	margin-bottom: 3px;
+}
+
+#coon-settings .sub-settings {
+	margin-left: 26px;
+}
+
+/* Environments*/
+
+#environments-content .environment-title{
+	margin:0;
+}
+
+#environments-content li{
+	margin:10px 0;
+}
