@@ -3,13 +3,15 @@
   var templates = [
     'application',
     'settings',
-    'environments'
+    'environments',
+    'about'
   ];
 
   function compileTemplates() {
     templates.forEach(function(name){
-      var templateName = 'templates/' + name + '.hbs';
-      $.get(templateName).then(function(data){
+      var templateName = `templates/${name}.hbs`;
+
+      $.get(templateName).then((data) => {
         Ember.TEMPLATES[name] = Ember.Handlebars.compile(data) ;
       });
     });

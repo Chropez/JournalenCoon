@@ -30,6 +30,7 @@
 	text-align: center;
 	font-size: 30px;
 	height: 50px;
+	cursor: pointer;
 }
 
 #sidebar li:hover, #sidebar li.active {
@@ -56,7 +57,7 @@
 	width: 100%;
 	overflow: auto;
 
-	background: url(../img/the_coon_jumbo.jpg);
+	background: url(../../img/the_coon_jumbo-transparent.png);
 	/*background-size: 399px 290px;*/
 	background-size: 250px 180px;
   background-repeat: no-repeat;

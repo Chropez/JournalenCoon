@@ -7,9 +7,9 @@ Coon.Background = (function(Background){
       'bower_components/handlebars/handlebars.min.js' ,
       'src/contentScripts/utils.js' ,
       'src/contentScripts/navbar.js' ,
-      'src/contentScripts/rememberLastPage.js' ,
-      'src/contentScripts/keepMeLoggedIn.js' ,
-      'src/contentScripts/journalComments.js' ,
+      'src/contentScripts/remember-last-page.js' ,
+      'src/contentScripts/keep-me-logged-on.js' ,
+      'src/contentScripts/journal-comments.js' ,
       'src/contentScripts/main.js'
     ];
 
