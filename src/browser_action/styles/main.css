@@ -53,15 +53,27 @@
 
 /* Main Content */
 #main-content {
-	padding: 6px 20px;
 	width: 100%;
 	overflow: auto;
-
+/*
 	background: url(../../img/the_coon_jumbo-transparent.png);
-	/*background-size: 399px 290px;*/
 	background-size: 250px 180px;
   background-repeat: no-repeat;
+	background-position: right bottom;*/
+}
+#main-content::after {
+	content: "";
+  background: url(../../img/the_coon_jumbo-transparent.png);
+	opacity: 0.1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  background-repeat: no-repeat;
 	background-position: right bottom;
+	background-size: 345px 250px;
 }
 
 #main-content .header{
@@ -77,10 +89,13 @@
 	font-size: 25px;
 }
 
-#main-content .content {
-	padding: 0 4px;
+#main-content .content-container {
+	padding: 6px 20px;
 }
 
+#main-content .content {
+	padding: 0 5px;
+}
 /* General */
 .coon-img {
 	margin-top: 20px;

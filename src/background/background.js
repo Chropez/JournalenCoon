@@ -14,8 +14,6 @@ Coon.Background = (function(Background){
     ];
 
     Background.init = function() {
-      console.log('run init');
-
         // Intecepts all messages
         chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
