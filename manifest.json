@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "manifest_version": 2,
   "description": "The Coon takes over Journalen!",
-  "homepage_url": "http://en.wikipedia.org/wiki/The_Coon",
+  "homepage_url": "https://chrome.google.com/webstore/detail/journalen-coon/ifejgfeebopfmdhohbgglhoiejdibfbc",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
