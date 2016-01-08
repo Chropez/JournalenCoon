@@ -198,12 +198,20 @@ Coon.Navbar = (function(Navbar, Utils){
 		        	var auths = tds.eq(3).find('ul li').map(function(){
 		        		return $(this).text().trim();
 		        	});
-		            return {
-		                link	: tds.eq(1).find('a').attr('href'),
-		                name	: tds.eq(1).text().trim(),
-		                auths	: auths,
-		                logins	: parseInt(tds.eq(4).text().trim())
-		            } ;
+
+							var authText = "";
+							if(auths && auths.length === 1) {
+								authText = auths[0];
+							}else {
+								authText = `${auths.length} behörigheter`;
+							}
+
+	            return {
+	                link	: tds.eq(1).find('a').attr('href'),
+	                name	: tds.eq(1).text().trim(),
+	                auths	: authText,
+	                logins	: parseInt(tds.eq(4).text().trim())
+	            } ;
 		        }
 		    });
 	    }

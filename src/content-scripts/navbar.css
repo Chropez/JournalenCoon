@@ -82,6 +82,11 @@
 	min-height: 40px;
 }
 
+#coon-navbar-user-list li.admin {
+	padding:5px 5px 5px 15px;
+	min-height: 36px;
+}
+
 #coon-navbar-user-list li a {
 	color: #0FADAF;
 	text-decoration: none;

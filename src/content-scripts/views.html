@@ -12,9 +12,9 @@
 		<ul id="coon-navbar-user-list">
 			{{#if isAdmin}}
 				{{#each users}}
-					<li>
+					<li class="admin">
 						<a href="{{link}}">{{name}}</a>
-						{{!-- <div class="secondary-text auths">{{auths}}</div> --}}
+						<div class="secondary-text auths">{{auths}}</div>
 					</li>
 				{{else}}
 					<li>No users found</li>
