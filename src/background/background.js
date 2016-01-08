@@ -5,12 +5,12 @@ Coon.Background = (function(Background){
     const contentScripts = [
       'bower_components/jquery/dist/jquery.min.js' ,
       'bower_components/handlebars/handlebars.min.js' ,
-      'src/contentScripts/utils.js' ,
-      'src/contentScripts/navbar.js' ,
-      'src/contentScripts/remember-last-page.js' ,
-      'src/contentScripts/keep-me-logged-on.js' ,
-      'src/contentScripts/journal-comments.js' ,
-      'src/contentScripts/main.js'
+      'src/content-scripts/utils.js' ,
+      'src/content-scripts/navbar.js' ,
+      'src/content-scripts/remember-last-page.js' ,
+      'src/content-scripts/keep-me-logged-on.js' ,
+      'src/content-scripts/journal-comments.js' ,
+      'src/content-scripts/main.js'
     ];
 
     Background.init = function() {
@@ -46,7 +46,7 @@ Coon.Background = (function(Background){
     let injectContentScripts = function(tab) {
       getEnvironmentsPromise().then((envs) => {
         if(urlMatchesEnvs(tab.url, envs)) {
-          chrome.tabs.insertCSS(tab.id, { file: 'src/contentScripts/navbar.css' });
+          chrome.tabs.insertCSS(tab.id, { file: 'src/content-scripts/navbar.css' });
           executeScript(tab.id, { code: 'console.log("Journalen Coon is injecting scripts...");'});
           contentScripts.forEach((script) => {
             executeScript(tab.id, { file: script });
@@ -61,7 +61,7 @@ Coon.Background = (function(Background){
     } ;
 
     let urlMatchesEnvs = function(url, envs) {
-      return envs.some((env) => {
+      return envs.some(env => {
         if(env.user && env.user.length > 0 && objectHasUrl(url, env.user)){
             return true;
         }
@@ -74,7 +74,7 @@ Coon.Background = (function(Background){
 
     /// obj = {url: 'my.url'}
     let objectHasUrl = function(url, obj){
-      return obj.some((user) => {
+      return obj.some(user => {
         if(user.url && url.startsWith(user.url)) {
             return true;
         }
@@ -122,23 +122,3 @@ Coon.Background = (function(Background){
   return Background;
 
 })(Coon.Background || {});
-
-//
-// "http://local.jpn/*",
-// "http://local.admin.jpn/*",
-// "http://test.jpn.se/*",
-// "http://test.admin.jpn.se/*",
-// "https://demo.jpn.se/*",
-// "https://demo.admin.jpn.se/*",
-// "http://integration.jpn.se/*",
-// "http://integration.admin.jpn.se/*",
-// "http://82.136.180.244/JpnExternTest/WebClient/*",
-// "http://82.136.180.244/JpnExternTest/Admin/*",
-// "http://ejournalen.healthcare.evry.se/*",
-// "http://82.196.191.237:8080/*",
-// "http://172.17.254.12/*",
-// "http://172.17.254.12:8080/*",
-// "http://82.136.180.214/*",
-// "http://82.136.180.214:44358/*",
-// "https://82.136.180.104/*",
-// "https://82.136.180.104:44358/*"
