@@ -14,10 +14,11 @@ Coon.KeepMeLoggedIn = (function(kmli, Utils){
 		if(_baseUrl.isAdmin) {
 			startPolling(_pollUrl.admin);
 		}
-		
+
 		startPolling(_pollUrl.user);
 	};
 
+	/*jshint unused:false*/
 	var startPolling = function(url){
 		setInterval(function(){
 			$.get(url);

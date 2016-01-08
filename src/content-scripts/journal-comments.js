@@ -2,7 +2,7 @@ var Coon = Coon || {};
 
 Coon.JournalComments = (function(JournalComments, Navbar, Utils){
 	var urlPost = Utils.getBaseUrl() + 'Settings/UpdateJournalComments',
-		urlForm = Utils.getBaseUrl() + 'Settings/JournalComments'
+		urlForm = Utils.getBaseUrl() + 'Settings/JournalComments' ;
 
 	JournalComments.init = function(){
 		Navbar.afterLogin(function(){
@@ -12,15 +12,15 @@ Coon.JournalComments = (function(JournalComments, Navbar, Utils){
 
 	enableJournalComment = function(){
 		var promise =  $.Deferred();
-		var getForm = $.get(urlForm)
-						.then(postForm)
-						.then(function(){
-							promise.resolve();
-						})
-						// In case an error occurs
-						.fail(function(){
-							promise.resolve();
-						}) ;
+		$.get(urlForm)
+			.then(postForm)
+			.then(function(){
+				promise.resolve();
+			})
+			// In case an error occurs
+			.fail(function(){
+				promise.resolve();
+			}) ;
 
 		return promise;
 	};
@@ -31,7 +31,7 @@ Coon.JournalComments = (function(JournalComments, Navbar, Utils){
 			headers: getPostFormHeader(html),
 			type: 'POST',
 			url: urlPost,
-			data: {enableJournalComments: 'true'},	
+			data: {enableJournalComments: 'true'},
 			dataType: 'json',
 			success: function(){
 				//console.log('The coon enabled journal comments');
@@ -42,11 +42,11 @@ Coon.JournalComments = (function(JournalComments, Navbar, Utils){
 		});
 	};
 
-	getPostFormHeader = function(html){
+	getPostFormHeader = function(/* html */){
 		var antiForgeryToken = $('input[name="__RequestVerificationToken"]').val();
-		return { 
-			"__RequestVerificationToken": antiForgeryToken 
-		} 
+		return {
+			"__RequestVerificationToken": antiForgeryToken
+		};
 	};
 
 	return JournalComments;

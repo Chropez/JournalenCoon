@@ -10,12 +10,14 @@ Coon.RememberLastPage = (function(RememberLastPage, Navbar, Utils){
 	};
 
 	// Private methods
+	/*jshint unused:false*/
 	var logPage = function(cb){
 		chrome.runtime.sendMessage({ action : 'rememberThisPage', baseUrl: _baseUrl }, function( res ) {
 			cb(res.lastPage);
 		});
 	};
 
+	/*jshint unused:false*/
 	var interceptRelog = function(url) {
 		Navbar.afterLogin(function(){
 			Navbar.redirectUrl = url;
