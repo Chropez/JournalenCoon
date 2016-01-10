@@ -18,7 +18,7 @@ var Coon = Coon || {} ;
 		}
 
 		if( settings.keepMeLoggedInEnabled ){
-			Coon.KeepMeLoggedIn.init();
+			new Coon.KeepMeLoggedOn();
 		}
 
 

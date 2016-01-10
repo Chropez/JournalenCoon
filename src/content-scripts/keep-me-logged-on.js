@@ -1,30 +1,36 @@
 var Coon = Coon || {};
 
-Coon.KeepMeLoggedIn = (function(kmli, Utils){
-	var _baseUrl = Utils.getBaseUrl(true);
-	var _pollUrl = {
-		user  : _baseUrl.url + 'Dashboard/Index',
-		admin : _baseUrl.url + 'Dashboard/Index'
-	};
+(function(Utils){
+	'use strict';
 
-	var _pollInterval = 15 * 60 * 1000 ;  //15 minutes
+	Coon.KeepMeLoggedOn = class KeepMeLoggedOn {
 
-	kmli.init = function(){
-		if(!_baseUrl.isFromJournalen) { return ; } //Do nothing, the user might not be logged in
-		if(_baseUrl.isAdmin) {
-			startPolling(_pollUrl.admin);
+		constructor(baseUrl, pollInterval) {
+			// Init  variables
+			this._pollInterval = pollInterval || 15 * 60 * 1000; // 15 minutes
+			this._baseUrl = baseUrl || Utils.getBaseUrl(true);
+			this._pollUrl = {
+				user  : this._baseUrl.url + 'Dashboard/Index',
+				admin : this._baseUrl.url + 'Dashboard/Index'
+			};
+
+			this.init();
 		}
 
-		startPolling(_pollUrl.user);
+		init() {
+			if(!this._baseUrl.isFromJournalen) { return ; } //Do nothing, the user might not be logged in
+			if(this._baseUrl.isAdmin) {
+				this.startPolling(this._pollUrl.admin);
+				return;
+			}
+
+			this.startPolling(this._pollUrl.user);
+		}
+
+		startPolling(url){
+			setInterval(function(){
+				$.get(url);
+			}, this._pollInterval);
+		}
 	};
-
-	/*jshint unused:false*/
-	var startPolling = function(url){
-		setInterval(function(){
-			$.get(url);
-		}, _pollInterval);
-	};
-
-	return kmli ;
-
-})(Coon.KeepMeLoggedIn || {}, Coon.Utils);
+})(Coon.Utils);
