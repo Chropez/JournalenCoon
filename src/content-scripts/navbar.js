@@ -2,12 +2,8 @@ var Coon = Coon || {};
 Coon.Navbar = (function(Navbar, Utils){
 	'use strict';
 
-	// ---------------------------------------
-	// Private variables
-	// ---------------------------------------
-
 	// Elements
-	var $navbarWrapper, $navbar, $userList, $hoverAreaTrigger, $filterInput ;
+	var $navbarWrapper, $navbar, $userList, $hoverAreaTrigger, $filterInput, $navbarNav ;
 
 	// State
 	var _hasLoaded = false ,
@@ -22,22 +18,9 @@ Coon.Navbar = (function(Navbar, Utils){
 	// Rendering
 	var _template ;
 
-
-	// ---------------------------------------
-	// Public Variables
-	// ---------------------------------------
-
-	// Public Elements
-
-
 	/// See #Navbar.afterLogin
 	Navbar.redirectUrl = undefined;
 	var _baseUrl = Utils.getBaseUrl();
-
-
-	// ---------------------------------------
-	// Public Methods
-	// ---------------------------------------
 
 	// Inits
 	Navbar.init = function () {
@@ -86,10 +69,29 @@ Coon.Navbar = (function(Navbar, Utils){
 	    	$userList = $('#coon-navbar-user-list');
 	    	$hoverAreaTrigger = $('#coon-navbar-hoverarea-trigger');
 	    	$filterInput = $('#coon-filter-users');
+				$navbarNav = $('#coon-navbar-nav');
+
+				initNavbarNav();
 		});
 	};
 
-	var addEventHandlers = function(){
+	var initNavbarNav = function() {
+		// litsen to navbar nav click
+		$navbarNav.on('click', 'a', toggleNavbarNav);
+	} ;
+	var toggleNavbarNav = function(e) {
+		e.preventDefault();
+		const eleToShow = e.target.dataset['toggle'];
+		const $eleToShow = $(eleToShow);
+
+		$('a', $navbarNav).closest('li').removeClass('active');
+		$(e.target).closest('li').addClass('active');
+
+		$('.coon-navbar-content').hide();
+		$eleToShow.show();
+	} ;
+
+	var addEventHandlers = function() {
 		initHoverArea();
 
         $filterInput.on('keyup', function(){
