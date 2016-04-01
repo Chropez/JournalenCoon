@@ -47,7 +47,7 @@ Coon.Background = (function(Background){
       getEnvironmentsPromise().then((envs) => {
         if(urlMatchesEnvs(tab.url, envs)) {
           chrome.tabs.insertCSS(tab.id, { file: 'src/content-scripts/navbar.css' });
-          executeScript(tab.id, { code: 'console.log("Journalen Coon is injecting scripts...");'});
+          executeScript(tab.id, { code: 'console.info("Journalen Coon is injecting scripts...");'});
           contentScripts.forEach((script) => {
             executeScript(tab.id, { file: script });
           });
