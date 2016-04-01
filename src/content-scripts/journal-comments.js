@@ -1,53 +1,63 @@
 var Coon = Coon || {};
 
-Coon.JournalComments = (function(JournalComments, Navbar, Utils){
-	var urlPost = Utils.getBaseUrl() + 'Settings/UpdateJournalComments',
-		urlForm = Utils.getBaseUrl() + 'Settings/JournalComments' ;
+(function(Navbar, Utils) {
+	'use strict';
 
-	JournalComments.init = function(){
-		Navbar.afterLogin(function(){
-			return enableJournalComment();
-		});
-	};
+	class JournalComments {
+		constructor() {
+			this.urlPost = Utils.getBaseUrl() + 'Settings/UpdateJournalComments';
+			this.urlForm = Utils.getBaseUrl() + 'Settings/JournalComments';
+		}
 
-	enableJournalComment = function(){
-		var promise =  $.Deferred();
-		$.get(urlForm)
-			.then(postForm)
-			.then(function(){
-				promise.resolve();
-			})
-			// In case an error occurs
-			.fail(function(){
-				promise.resolve();
-			}) ;
+		init() {
+			Navbar.afterLogin(() => {
+				return this.enableJournalComment();
+			});
+		}
 
-		return promise;
-	};
+		enableJournalComment() {
+				const promise =  $.Deferred();
+				const _this = this;
+				$.get(this.urlForm)
+					.then((data) => {
+						_this.postForm(data);
+					})
+					.then(() => {
+						promise.resolve();
+					})
+					// In case an error occurs
+					.fail(() => {
+						promise.resolve();
+					}) ;
 
-	postForm = function(data){
-		var html = $($.parseHTML(data));
-		return $.ajax({
-			headers: getPostFormHeader(html),
-			type: 'POST',
-			url: urlPost,
-			data: {enableJournalComments: 'true'},
-			dataType: 'json',
-			success: function(){
-				//console.log('The coon enabled journal comments');
-			},
-			error: function(){
-				//console.log('Error: the coon failed to enable journal coomments');
-			}
-		});
-	};
+				return promise;
+		}
 
-	getPostFormHeader = function(/* html */){
-		var antiForgeryToken = $('input[name="__RequestVerificationToken"]').val();
-		return {
-			"__RequestVerificationToken": antiForgeryToken
-		};
-	};
 
-	return JournalComments;
-})(Coon.JournalComments || {}, Coon.Navbar, Coon.Utils);
+		postForm(data) {
+			var html = $($.parseHTML(data));
+			return $.ajax({
+				headers: this.getPostFormHeader(html),
+				type: 'POST',
+				url: this.urlPost,
+				data: {enableJournalComments: 'true'},
+				dataType: 'json',
+				success: function(){
+					console.log('The coon enabled journal comments');
+				},
+				error: function(){
+					console.log('Error: the coon failed to enable journal coomments');
+				}
+			});
+		}
+
+		getPostFormHeader (/* html */){
+			var antiForgeryToken = $('input[name="__RequestVerificationToken"]').val();
+			return {
+				"__RequestVerificationToken": antiForgeryToken
+			};
+		}
+	}
+
+	Coon.JournalComments = new JournalComments();
+})(Coon.Navbar, Coon.Utils);

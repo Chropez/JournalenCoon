@@ -32,7 +32,6 @@ Coon.Navbar = (function(Navbar, Utils){
 
 	/// See #Navbar.afterLogin
 	Navbar.redirectUrl = undefined;
-
 	var _baseUrl = Utils.getBaseUrl();
 
 

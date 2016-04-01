@@ -1,32 +1,34 @@
-var Coon = Coon || {} ;
+var Coon = Coon || {};
 
 (function() {
-	'use strict';
+  'use strict';
 
-	// Don't activate the Coon if it's already active
-	if(Coon.IsActive) {
-		return;
-	}
+  // Don't activate the Coon if it's already active
+  if (Coon.IsActive) {
+    return;
+  }
 
-	chrome.runtime.sendMessage({ action : 'settings' }, function(settings) {
-		if( settings.navbarEnabled ){
-        	Coon.Navbar.init();
+  chrome.runtime.sendMessage({
+    action: 'settings'
+  }, (settings) => {
 
-			if( settings.rememberLastPageEnabled ) {
-				Coon.RememberLastPage.init();
-			}
-		}
+    if (settings.navbarEnabled) {
+      Coon.Navbar.init();
 
-		if( settings.keepMeLoggedInEnabled ){
-			new Coon.KeepMeLoggedOn();
-		}
+      if (settings.rememberLastPageEnabled) {
+        Coon.RememberLastPage.init();
+      }
+    }
 
+    if (settings.keepMeLoggedInEnabled) {
+      Coon.KeepMeLoggedOn.init();
+    }
 
-		if( settings.journalCommentAutoEnabled ){
-			Coon.JournalComments.init();
-		}
+    if (settings.journalCommentAutoEnabled) {
+      Coon.JournalComments.init();
+    }
 
-		Coon.IsActive = true; // Sets flag that the Coon is Active
-	});
+    Coon.IsActive = true; // Sets flag that the Coon is Active
+  });
 
 })();
