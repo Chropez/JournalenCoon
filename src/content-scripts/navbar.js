@@ -87,7 +87,7 @@ Coon.Navbar = (function(Navbar, Utils){
 		$('a', $navbarNav).closest('li').removeClass('active');
 		$(e.target).closest('li').addClass('active');
 
-		$('.coon-navbar-content').hide();
+		$('.coon-navbar-tab-content').hide();
 		$eleToShow.show();
 	} ;
 

@@ -1,59 +1,60 @@
 <script type="text/x-handlebars-template" data-template-id="coon-navbar">
 	<div id="coon-navbar-content">
-		<a href="{{homeLink}}" id="coon-navbar-content-header">
-			<div id="coon-navbar-content-header-background"></div>
-		</a>
+		<div id="coon-navbar-content-container">
+			<a href="{{homeLink}}" id="coon-navbar-content-header">
+				<div id="coon-navbar-content-header-background"></div>
+			</a>
 
-		<ul id="coon-navbar-nav" class="nav nav-tabs">
-		  <li class="active">
-		    <a href="#" data-toggle="#coon-navbar-user-content">Users</a>
-		  </li>
-		  <li>
-				<a href="#" data-toggle="#coon-navbar-functions-content">Functions</a>
-			</li>
-		</ul>
-
-		<div id="coon-navbar-user-content" class="coon-navbar-content">
-			<div id="coon-filter-users-wrapper">
-				<input type="text" id="coon-filter-users" placeholder="Skriv namn, pnr eller län">
-			</div>
-
-			<ul id="coon-navbar-user-list">
-				{{#if isAdmin}}
-					{{#each users}}
-						<li class="admin">
-							<a href="{{link}}">{{name}}</a>
-							<div class="secondary-text auths">{{auths}}</div>
-						</li>
-					{{else}}
-						<li>No users found</li>
-					{{/each}}
-
-				{{else}}
-					{{#each users}}
-						<li>
-							<a href="{{link}}">{{name}}</a>
-							<div class="secondary-text pnr">{{pnr}}</div>
-							<div class="secondary-text Län">{{county}}</div>
-						</li>
-
-					{{else}}
-						<li>No users found</li>
-					{{/each}}
-				{{/if}}
-			</ul>
-		</div>
-
-		<div id="coon-navbar-functions-content" class="coon-navbar-content">
-			<ul>
-				<li>
-					<a href="javascript:window.loadDataFetcherStatus();">
-						Data Fetcher Status
-					</a>
+			<ul id="coon-navbar-nav" class="nav nav-tabs">
+			  <li class="active">
+			    <a href="#" data-toggle="#coon-navbar-user-content">Users</a>
+			  </li>
+			  <li>
+					<a href="#" data-toggle="#coon-navbar-functions-content">Functions</a>
 				</li>
 			</ul>
-		</div>
 
+			<div id="coon-navbar-user-content" class="coon-navbar-tab-content">
+				<div id="coon-filter-users-wrapper">
+					<input type="text" id="coon-filter-users" placeholder="Skriv namn, pnr eller län">
+				</div>
+
+				<ul id="coon-navbar-user-list">
+					{{#if isAdmin}}
+						{{#each users}}
+							<li class="admin">
+								<a href="{{link}}">{{name}}</a>
+								<div class="secondary-text auths">{{auths}}</div>
+							</li>
+						{{else}}
+							<li>No users found</li>
+						{{/each}}
+
+					{{else}}
+						{{#each users}}
+							<li>
+								<a href="{{link}}">{{name}}</a>
+								<div class="secondary-text pnr">{{pnr}}</div>
+								<div class="secondary-text Län">{{county}}</div>
+							</li>
+
+						{{else}}
+							<li>No users found</li>
+						{{/each}}
+					{{/if}}
+				</ul>
+			</div>
+
+			<div id="coon-navbar-functions-content" class="coon-navbar-content">
+				<ul>
+					<li>
+						<a href="javascript:window.loadDataFetcherStatus();">
+							Data Fetcher Status
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</div>
 
 	<div id="coon-navbar-overlay"></div>

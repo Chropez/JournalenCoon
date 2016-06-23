@@ -27,9 +27,10 @@
   background-color: gray;
   opacity: 0.2;
 }
-#coon-navbar.active #coon-navbar-content {
+#coon-navbar.active #coon-navbar-content, #coon-navbar.perma-active #coon-navbar-content  {
   left: 0;
 }
+
 #coon-navbar-content {
   position: fixed;
   top: 0;
@@ -42,6 +43,20 @@
   transition: all 0.3s;
   transition-delay: 0.2s;
 }
+
+.coon-navbar-tab-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#coon-navbar-content-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  widows: 100%;
+}
+
 #coon-navbar-overlay {
   background-color: gray;
   position: fixed;
