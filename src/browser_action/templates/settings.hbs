@@ -1,7 +1,7 @@
 <article class="content-container">
   <header class="header">
     <h3 class="title">
-      <span class="icon glyphicon glyphicon-cog"></span> Settings
+      <span class="icon glyphicon glyphicon-cog"></span> Inställningar
     </h3>
   </header>
   <section class="content">
@@ -16,29 +16,29 @@
         <div class="sub-settings">
           <label>
             {{input type="checkbox" checked=model.rememberLastPageEnabled change=(action "saveSettings")}}
-            Remember last page you were on
+            Kom ihåg senaste sidan
           </label>
         </div>
 
         <div>
           <label>
             {{input type="checkbox" checked=model.keepMeLoggedInEnabled change=(action "saveSettings")}}
-            Keep me logged in
+            Håll mig inloggad
           </label>
         </div>
 
         <div>
           <label>
             {{input type="checkbox" checked=model.journalCommentAutoEnabled change=(action "saveSettings")}}
-            Enable Journal notes automatically
+            Sätt på Patientens kommentarer automatiskt
           </label>
         </div>
       </div>
       {{#if showErrorMessage}}
       <div style="height: 70px">
         <div class="alert alert-warning" id="message" role="alert">
-          <h4>Settings changed!</h4>
-          The changes will be made next time you load the page!
+          <h4>Inställningarna har sparats!</h4>
+          Ladda om Journalen-sidan för att ändringarna ska slå genom.
         </div>
       </div>
       {{/if}}
