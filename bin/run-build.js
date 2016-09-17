@@ -15,7 +15,7 @@ let output = fs.createWriteStream(journalenCoonZip);
 
 output.on('close', function () {
     console.log('Zip file created: ' + archive.pointer() + ' total bytes');
-    console.log('Zip file ready at: \r\n' + journalenCoonZip)
+    console.log('Zip file ready at: \r\n' + journalenCoonZip);
 });
 
 archive.on('error', function(err){
