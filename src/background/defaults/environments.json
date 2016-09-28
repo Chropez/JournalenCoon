@@ -35,10 +35,12 @@
     "id" : 4,
     "name": "Extern Test (QA)",
     "user" : [
-      { "url" : "http://82.136.180.244/JpnExternTest/WebClient" }
+      { "url" : "http://82.136.180.244/JpnExternTest/WebClient" },
+      { "url" : "http://qa.journalen.lul.sjunet.org/" }
     ],
     "admin" : [
-      { "url" : "http://82.136.180.244/JpnExternTest/Admin" }
+      { "url" : "http://82.136.180.244/JpnExternTest/Admin" },
+      { "url" : "http://qa.admin.journalen.lul.sjunet.org/" }
     ]
   },
   {
@@ -94,10 +96,12 @@
     "name": "SIT (NMT)",
     "hidden": true,
     "user" : [
-      { "url" : "https://82.136.180.104/" }
+      { "url" : "https://82.136.180.104/" },
+      { "url" : "http://sit.journalen.lul.sjunet.org/" }
     ],
     "admin" : [
-      { "url" : "https://82.136.180.104:44358/" }
+      { "url" : "https://82.136.180.104:44358/" },
+      { "url" : "sit.admin.journalen.lul.sjunet.org/" }
     ]
   }
 ]
