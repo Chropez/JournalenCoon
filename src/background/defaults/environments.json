@@ -35,12 +35,12 @@
     "id" : 4,
     "name": "Extern Test (QA)",
     "user" : [
-      { "url" : "http://82.136.180.244/JpnExternTest/WebClient" },
-      { "url" : "http://qa.journalen.lul.sjunet.org/" }
+      { "url" : "http://qa.journalen.lul.sjunet.org/" },
+      { "url" : "http://82.136.180.244/JpnExternTest/WebClient" }
     ],
     "admin" : [
-      { "url" : "http://82.136.180.244/JpnExternTest/Admin" },
-      { "url" : "http://qa.admin.journalen.lul.sjunet.org/" }
+      { "url" : "http://qa.admin.journalen.lul.sjunet.org/" },
+      { "url" : "http://82.136.180.244/JpnExternTest/Admin" }
     ]
   },
   {
@@ -83,12 +83,12 @@
     "name": "LUL QA",
     "hidden": true,
     "user" : [
-      { "url" : "https://82.136.180.104/" },
-      { "url" : "https://ejqa-apx-01/" }
+      { "url" : "https://ejqa-apx-01/" },
+      { "url" : "https://82.136.180.104/" }
     ],
     "admin" : [
-      { "url" : "https://82.136.180.104:44358/" },
-      { "url" : "https://ejqa-admx-01/" }
+      { "url" : "https://ejqa-admx-01/" },
+      { "url" : "https://82.136.180.104:44358/" }
     ]
   },
   {
@@ -96,12 +96,12 @@
     "name": "SIT (NMT)",
     "hidden": true,
     "user" : [
-      { "url" : "https://82.136.180.104/" },
-      { "url" : "http://sit.journalen.lul.sjunet.org/" }
+      { "url" : "http://sit.journalen.lul.sjunet.org/" },
+      { "url" : "https://82.136.180.104/" }
     ],
     "admin" : [
-      { "url" : "https://82.136.180.104:44358/" },
-      { "url" : "sit.admin.journalen.lul.sjunet.org/" }
+      { "url" : "http://sit.admin.journalen.lul.sjunet.org/" },
+      { "url" : "https://82.136.180.104:44358/" }
     ]
   }
 ]

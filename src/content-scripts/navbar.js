@@ -176,7 +176,7 @@ Coon.Navbar = (function(Navbar, Utils){
 	    var html = $("<div></div>").html(htmlResponse),
 	        rows = html.find('tr');
 
-	    _isAdmin = html.find('.container>h2').children().length === 0;
+	    _isAdmin = html.find('.container table > thead tr').children().length < 6;
 
 	    if(!_isAdmin){
 			_allUsers = $.map(rows, function(row){
