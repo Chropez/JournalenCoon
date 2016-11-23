@@ -46,7 +46,6 @@
   {
     "id" : 5,
     "name": "Integration",
-    "hidden": true,
     "user" : [
       { "url" : "http://integration.jpn.se/" }
     ],
@@ -57,7 +56,6 @@
   {
     "id" : 6,
     "name": "Extern Demo",
-    "hidden": true,
     "user" : [
       { "url" : "http://ejournalen.healthcare.evry.se/" },
       { "url" : "http://172.17.254.12/" }
@@ -70,7 +68,6 @@
   {
     "id" : 7,
     "name": "Staging",
-    "hidden": true,
     "user" : [
       { "url" : "http://82.136.180.214/" }
     ],
@@ -81,7 +78,6 @@
   {
     "id" : 8,
     "name": "LUL QA",
-    "hidden": true,
     "user" : [
       { "url" : "https://ejqa-apx-01/" },
       { "url" : "https://82.136.180.104/" }
@@ -94,7 +90,6 @@
   {
     "id" : 9,
     "name": "SIT (NMT)",
-    "hidden": true,
     "user" : [
       { "url" : "http://sit.journalen.lul.sjunet.org/" },
       { "url" : "https://82.136.180.104/" }
@@ -102,6 +97,16 @@
     "admin" : [
       { "url" : "http://sit.admin.journalen.lul.sjunet.org/" },
       { "url" : "https://82.136.180.104:44358/" }
+    ]
+  },
+  {
+    "id" : 10,
+    "name": "GUI test",
+    "user" : [
+      { "url" : "http://guitest.jpn.se/" }
+    ],
+    "admin" : [
+      { "url" : "http://guitest.admin.jpn.se/" }
     ]
   }
 ]
