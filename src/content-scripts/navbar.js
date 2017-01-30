@@ -94,9 +94,9 @@ Coon.Navbar = (function(Navbar, Utils){
 	var addEventHandlers = function() {
 		initHoverArea();
 
-        $filterInput.on('keyup', function(){
-        	filterUserList()	;
-        } );
+    $filterInput.on('keyup', function(){
+    	filterUserList()	;
+    } );
 	};
 
 	var initHoverArea = function(){
@@ -122,8 +122,8 @@ Coon.Navbar = (function(Navbar, Utils){
 	    });
 
 	    $navbar.mouseleave(function(){
-            $navbarWrapper.removeClass("active");
-        });
+        $navbarWrapper.removeClass("active");
+      });
 	};
 
 	var filterUserList = function(){
@@ -174,7 +174,7 @@ Coon.Navbar = (function(Navbar, Utils){
 	var retrieveUsers = function(htmlResponse) {
 
 	    var html = $("<div></div>").html(htmlResponse),
-	        rows = html.find('tr');
+	        rows = html.find('table').first().find('tr');
 
 	    _isAdmin = html.find('.container table > thead tr').children().length < 6;
 
